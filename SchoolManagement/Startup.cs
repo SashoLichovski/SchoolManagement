@@ -45,6 +45,9 @@ namespace SchoolManagement
                 options.Password.RequireNonAlphanumeric = true;
             });
 
+            services.AddTransient<IExamService, ExamService>();
+            services.AddTransient<IExamRepositoty, ExamRepositoty>();
+
             services.AddTransient<ISubjectService,SubjectService>();
             services.AddTransient<ISubjectRepository, SubjectRepository>();
 

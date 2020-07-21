@@ -39,7 +39,7 @@ namespace SchoolManagement.Common
                 Id = classroom.Id,
                 RoomNumber = classroom.RoomNumber,
                 Capacity = classroom.Capacity,
-                Subjects = classroom.Exams.Select(x => x.Subject.ToSubjectView().Title).ToList(),
+                Subjects = classroom.Exams.Select(x => x.Subject?.ToSubjectView().Title).ToList(),
                 Exams = classroom.Exams.Select(x => x.ToExamViewModel()).ToList()
             };
         }

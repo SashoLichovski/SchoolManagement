@@ -1,10 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Models;
 using SchoolManagement.Repositories.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SchoolManagement.Repositories
 {
@@ -20,12 +18,6 @@ namespace SchoolManagement.Repositories
         public void Add(Classroom newClassroom)
         {
             context.Classrooms.Add(newClassroom);
-            context.SaveChanges();
-        }
-
-        public void AddExam(Exam subjectClassroom)
-        {
-            context.Exams.Add(subjectClassroom);
             context.SaveChanges();
         }
 
