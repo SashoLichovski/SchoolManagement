@@ -26,7 +26,7 @@
                     <td>@classroom.RoomNumber</td>
                     <td>@classroom.Capacity</td>
                     <td style="text-align:center">
-                        <a class="btn btn-primary btn-sm" asp-action="CreateExam" asp-route-classroomId="@classroom.Id">Add exam</a> |
+                        <a class="btn btn-primary btn-sm" asp-controller="Exam" asp-action="Create" asp-route-classroomId="@classroom.Id">Add exam</a> |
                         <button class="btn btn-info btn-sm" id="@classroom.Id" onclick="toggle(event)">Schedule</button>
                     </td>
                 </tr>
