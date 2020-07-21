@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SchoolManagement.Models;
+using SchoolManagement.Data;
 using SchoolManagement.Repositories;
 using SchoolManagement.Repositories.Interfaces;
 using SchoolManagement.Services;
