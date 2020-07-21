@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SchoolManagement.Services.Interfaces;
 using SchoolManagement.ViewModels;
 
@@ -17,7 +18,7 @@ namespace SchoolManagement.Controllers
             var classrooms = classroomService.GetAll();
             return View(classrooms);
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             var model = new ClassroomViewModel();

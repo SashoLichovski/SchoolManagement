@@ -7,6 +7,7 @@
 
     <div class="col-md-6">
         <form asp-action="CreateExam" method="post">
+            <input hidden name="userId" value="@User.FindFirst(ClaimTypes.NameIdentifier).Value" />
             <label>Select subject</label>
             <input hidden name="classroomId" value="@Model.ClassroomId" />
             <select class="form-control" name="subjectTitle">
@@ -18,7 +19,7 @@
             <span></span>
             <br />
             <label name="examDate">Exam start</label>
-            <input class="form-control" name="examDate" type="datetime-local" id="startDate" onchange="setTime()"/>
+            <input class="form-control" name="examStart" type="datetime-local" min="@DateTime.Now.AddDays(15).ToString("yyyy-MM-ddThh:mm")" id="startDate" onchange="setTime()"/>
             <br />
             <label name="examEnd">Exam end</label>
             <input class="form-control" name="examEnd" type="datetime-local" id="endDate"/>
@@ -30,5 +31,6 @@
 </div>
 
 @section Scripts{ 
+    <script src="~/lib/MomentJs/moment.js"></script>
     <script src="~/js/exam.js"></script>
 }

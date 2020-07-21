@@ -48,9 +48,12 @@ namespace SchoolManagement.Common
         {
             return new ExamViewModel
             {
+                Id = exam.Id,
                 ClassroomId = exam.ClassroomId,
                 ExamDate = exam.ExamDate,
                 ExamEnd = exam.ExamEnd,
+                ExamType = exam.ExamType,
+                CreatedBy = exam.CreatedBy
             };
         }
     }

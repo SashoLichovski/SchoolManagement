@@ -7,10 +7,13 @@
 }
 
 <div class="container">
-    <br />
-    <a class="btn btn-primary" asp-action="Create">Create classroom</a>
-    <hr />
-    <br />
+    @if (User.IsInRole("Admin"))
+    {
+        <br />
+        <a class="btn btn-primary" asp-action="Create">Create classroom</a>
+        <hr />
+        <br />
+    }
     <table class="table table-striped table-dark">
         <thead>
             <tr>
@@ -40,6 +43,8 @@
                                     <th>Subject</th>
                                     <th>Exam start</th>
                                     <th>Exam end</th>
+                                    <th>Exam type</th>
+                                    <th>Actions</th>
                                 </tr>
                                 @for (int i = 0; i < classroom.Subjects.Count; i++)
                                 {
@@ -47,6 +52,21 @@
                                         <td>@classroom.Subjects[i]</td>
                                         <td>@classroom.Exams[i].ExamDate.ToString("MMMM-dd-yyy hh:mm")</td>
                                         <td>@classroom.Exams[i].ExamEnd.ToString("MMMM-dd-yyy hh:mm")</td>
+                                        <td>@classroom.Exams[i].ExamType</td>
+                                        <td>
+                                            @if (User.FindFirst(ClaimTypes.NameIdentifier).Value == classroom.Exams[i].CreatedBy || User.IsInRole("Admin"))
+                                            {
+                                                <form asp-controller="Exam" asp-action="ChangeExamType">
+                                                    <input hidden name="examId" value="@classroom.Exams[i].Id" />
+                                                    <select name="examType">
+                                                        <option value="@EnumExam.Undefined">Undefined</option>
+                                                        <option value="@EnumExam.Essey">Essey</option>
+                                                        <option value="@EnumExam.QuestionAnswer">Question-Answer</option>
+                                                    </select>
+                                                    <input type="submit" class="btn btn-primary btn-sm" value="change" />
+                                                </form>
+                                            }
+                                        </td>
                                     </tr>
                                 }
                             </table>

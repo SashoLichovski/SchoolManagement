@@ -1,4 +1,5 @@
-﻿using SchoolManagement.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using SchoolManagement.Models;
 using SchoolManagement.Repositories.Interfaces;
 using SchoolManagement.Services.Interfaces;
 using SchoolManagement.ViewModels;
@@ -13,15 +14,17 @@ namespace SchoolManagement.Services
         private readonly IExamRepositoty examRepositoty;
         private readonly ISubjectService subjectService;
         private readonly IClassroomService classroomService;
+        private readonly UserManager<IdentityUser> userManager;
 
-        public ExamService(IExamRepositoty examRepositoty, ISubjectService subjectService, IClassroomService classroomService)
+        public ExamService(IExamRepositoty examRepositoty, ISubjectService subjectService, IClassroomService classroomService, UserManager<IdentityUser> userManager)
         {
             this.examRepositoty = examRepositoty;
             this.subjectService = subjectService;
             this.classroomService = classroomService;
+            this.userManager = userManager;
         }
 
-        public ActionMessage Create(int classroomId, string subjectTitle, DateTime examStart, DateTime examEnd)
+        public ActionMessage Create(int classroomId, string subjectTitle, DateTime examStart, DateTime examEnd, string userId)
         {
             ActionMessage response = new ActionMessage();
             ClassroomViewModel model = classroomService.GetById(classroomId);
@@ -35,7 +38,7 @@ namespace SchoolManagement.Services
                 }
             }
 
-            if (examStart < DateTime.Now.AddDays(14))
+            if (examStart <= DateTime.Now.AddDays(14))
             {
                 response.Error = "Invalid date! Exam must be scheduled 14 days in advance";
             }
@@ -51,6 +54,7 @@ namespace SchoolManagement.Services
                     SubjectId = subjectService.GetByTitle(subjectTitle).Id,
                     ExamDate = examStart,
                     ExamEnd = examEnd,
+                    CreatedBy = userId,
                 };
 
                 examRepositoty.Add(exam);
@@ -63,6 +67,24 @@ namespace SchoolManagement.Services
         public List<string> GetSubjectTitles()
         {
             return subjectService.GetAll().Select(x => x.Title).ToList();
+        }
+
+        public ActionMessage UpdateExamType(string examType, int examId)
+        {
+            var response = new ActionMessage();
+            var dbExam = examRepositoty.GetById(examId);
+            EnumExam.TryParse(examType, out EnumExam result);
+            if (dbExam != null)
+            {
+                dbExam.ExamType = result;
+                examRepositoty.Update(dbExam);
+                response.Message = $"Exam succesfully updated to {examType}";
+            }
+            else
+            {
+                response.Error = "Update failed. Exam does not exist";
+            }
+            return response;
         }
     }
 }

@@ -203,9 +203,14 @@ namespace SchoolManagement.Migrations
 
                     b.Property<int>("ClassroomId");
 
+                    b.Property<string>("CreatedBy")
+                        .IsRequired();
+
                     b.Property<DateTime>("ExamDate");
 
                     b.Property<DateTime>("ExamEnd");
+
+                    b.Property<int>("ExamType");
 
                     b.Property<int>("SubjectId");
 
@@ -282,12 +287,12 @@ namespace SchoolManagement.Migrations
             modelBuilder.Entity("SchoolManagement.Models.Exam", b =>
                 {
                     b.HasOne("SchoolManagement.Models.Classroom", "Classroom")
-                        .WithMany("Subjects")
+                        .WithMany("Exams")
                         .HasForeignKey("ClassroomId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("SchoolManagement.Models.Subject", "Subject")
-                        .WithMany("Classrooms")
+                        .WithMany("Exams")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

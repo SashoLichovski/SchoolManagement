@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SchoolManagement.Services.Interfaces;
 using SchoolManagement.ViewModels;
 
 namespace SchoolManagement.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class SubjectController : Controller
     {
         private readonly ISubjectService subjectService;
