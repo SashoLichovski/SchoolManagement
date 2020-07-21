@@ -18,10 +18,10 @@
             <span></span>
             <br />
             <label name="examDate">Exam start</label>
-            <input class="form-control" name="examDate" type="datetime-local"/>
+            <input class="form-control" name="examDate" type="datetime-local" id="startDate" onchange="setTime()"/>
             <br />
             <label name="examEnd">Exam end</label>
-            <input class="form-control" name="examEnd" type="datetime-local"/>
+            <input class="form-control" name="examEnd" type="datetime-local" id="endDate"/>
             <br />
             <input class="btn btn-primary" type="submit" value="Add" />
         </form>
