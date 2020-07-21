@@ -1,0 +1,58 @@
+School managment
+
+Models:
+- User, roles(Proffesor, Student, Admin)
+- Subject
+- Exam
+- Semester 
+- Class room
+
+Admin side:
+1. Set roles for Proffesor accounts
+
+Proffesor side:
+1. Create exams 
+- Essay exam
+  * Set date
+  * Set class room
+  * Set minimum words for the essay
+
+- Question Answer exam
+  * Set date
+  * Set class room
+  * Enter list of questions and 4 possible answers for each
+  * Set points for each question
+  * Set min points for passing
+
+2. Review students for his/hers subject
+- Send messages
+  * To all students for a subject
+  * To single student 
+  * On school forum
+
+- Remove students from subjects
+  * Wirte caption why is student removed
+
+- Review student history
+  * General overview
+  * Subjects passed
+  * Subjects failed
+  * Pending subjects
+
+3. Manage subjects
+- Add study material
+
+
+Student side:
+1. Manage semester
+- Create semester
+  * choose subjects
+  * review all details for chosen subjects
+
+2. Review previous semesters
+
+3. Send messages
+ - On school forum
+ - To single proffesor
+ - To single student
+

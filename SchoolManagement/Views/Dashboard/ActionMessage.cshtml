@@ -1,0 +1,18 @@
+﻿@model SchoolManagement.ViewModels.ActionMessage
+
+    <div class="container">
+        <br />
+        @if (string.IsNullOrEmpty(Model.Error))
+        {
+            <h3 class="alert-success" style="padding: 20px;">@Model.Message</h3>
+        }
+        else 
+        {
+            <h3 class="alert-danger" style="padding: 20px;">@Model.Error</h3>
+        }
+        <br />
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a asp-action="AdminMenu">Back to dashboard</a>
+        }
+    </div>

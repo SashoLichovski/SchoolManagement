@@ -1,0 +1,60 @@
+﻿@model SchoolManagement.ViewModels.ManageUsersModel
+@using Microsoft.AspNetCore.Identity
+
+@{
+    ViewData["Title"] = "Manage Users";
+}
+
+@inject UserManager<IdentityUser> UserManager
+
+
+<div class="container">
+    <br />
+    <a asp-controller="User" asp-action="Register" class="btn btn-primary">Create new user</a>
+    <hr />
+    <br />
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Roles</th>
+                <th>Manage Roles</th>
+                <th>Delete Accounts</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>
+                        @foreach (var role in await UserManager.GetRolesAsync(user))
+                        {
+                            <p>@role</p>
+                        }
+                    </td>
+                    <td>
+                        @foreach (var role in Model.Roles)
+                        {
+                            if (await UserManager.IsInRoleAsync(user, role.Name))
+                            {
+                                <p>
+                                    <a asp-controller="Role" asp-action="RemoveRole" asp-route-roleName="@role.Name" asp-route-userId="@user.Id" class="text-danger">Remove @role.Name.ToLower() role</a>
+                                </p>
+                            }
+                            else
+                            {
+                                <p>
+                                    <a asp-controller="Role" asp-action="AddRole" asp-route-roleName="@role.Name" asp-route-userId="@user.Id" class="text-success">Set @role.Name.ToLower() role</a>
+                                </p>
+                            }
+                        }
+                    </td>
+                    <td>
+                        <a asp-controller="User" asp-action="DeleteUser" asp-route-userId="@user.Id" onclick="return confirm('Are you sure you want to delete @user.UserName?')">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,19 @@
+﻿.link{
+    margin: 15px;
+    text-align: center;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 15px;
+}
+
+.container a{
+    color: black;
+}
+
+.fas{
+    font-size: 3em;
+}

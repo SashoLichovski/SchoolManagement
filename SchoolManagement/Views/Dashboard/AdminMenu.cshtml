@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Menu";
+}
+@section Styles{ 
+    <link rel="stylesheet" href="~/css/dashboard.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/lib/Hover-master/css/hover-min.css" />
+}
+
+    <h3>Dashboard menu</h3>
+    <hr />
+<div class="container flex">
+    <a asp-controller="Role" asp-action="CreateRole" class="link hvr-grow">
+        <div >
+            <h4>Create roles</h4>
+            <i class="fas fa-user-tag"></i>
+        </div>
+    </a>
+
+    <a asp-controller="User" asp-action="ManageUsers" class="link  hvr-grow">
+        <div >
+            <h4>Manage users</h4>
+            <i class="fas fa-address-card"></i>
+        </div>
+    </a>
+
+    <a asp-controller="Subject" asp-action="Overview" class="link  hvr-grow">
+        <div >
+            <h4>Manage Subjects</h4>
+            <i class="fas fa-atlas"></i>
+        </div>
+    </a>
+
+    <a asp-controller="Classroom" asp-action="Overview" class="link  hvr-grow">
+        <div >
+            <h4>Manage Classrooms</h4>
+            <i class="fas fa-person-booth"></i>
+        </div>
+    </a>
+</div>
+
+
+@section Scripts{ 
+    <script src="https://kit.fontawesome.com/15dcd5d68f.js" crossorigin="anonymous"></script>
+}

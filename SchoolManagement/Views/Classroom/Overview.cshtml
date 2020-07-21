@@ -1,0 +1,66 @@
+﻿@model List<SchoolManagement.ViewModels.ClassroomViewModel>
+@{
+    ViewData["Title"] = "Overview";
+}
+@section Styles { 
+    <link rel="stylesheet" href="~/css/tableDetails.css"/>
+}
+
+<div class="container">
+    <br />
+    <a class="btn btn-primary" asp-action="Create">Create classroom</a>
+    <hr />
+    <br />
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th>Classroom number</th>
+                <th>Capacity</th>
+                <th style="text-align:center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var classroom in Model)
+            {
+                <tr>
+                    <td>@classroom.RoomNumber</td>
+                    <td>@classroom.Capacity</td>
+                    <td style="text-align:center">
+                        <a class="btn btn-primary btn-sm" asp-action="CreateExam" asp-route-classroomId="@classroom.Id">Add exam</a> |
+                        <button class="btn btn-info btn-sm" id="@classroom.Id" onclick="toggle(event)">Schedule</button>
+                    </td>
+                </tr>
+
+                <tr class="hide" id="row-@classroom.Id">
+                    <td colspan="3">
+                        @if (classroom.Subjects.Count > 0)
+                        {
+                            <table class="table table-bordered table-dark">
+                                <tr>
+                                    <th>Subject</th>
+                                    <th>Exam start</th>
+                                    <th>Exam end</th>
+                                </tr>
+                                @for (int i = 0; i < classroom.Subjects.Count; i++)
+                                {
+                                    <tr>
+                                        <td>@classroom.Subjects[i]</td>
+                                        <td>@classroom.Exams[i].ExamDate.ToString("MMMM-dd-yyy hh:mm")</td>
+                                        <td>@classroom.Exams[i].ExamEnd.ToString("MMMM-dd-yyy hh:mm")</td>
+                                    </tr>
+                                }
+                            </table>
+                        }
+                        else
+                        {
+                            <p><b>No exams scheduled</b></p>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section Scripts{ 
+    <script src="~/js/toggleTable.js"></script>
+}
