@@ -17,7 +17,7 @@ namespace SchoolManagement.Data
         public DateTime ExamDate { get; set; }
         public DateTime ExamEnd { get; set; }
 
-        public EnumExam ExamType { get; set; }
+        public Enums.ExamType ExamType { get; set; }
         [Required]
         public string CreatedBy { get; set; }
     }

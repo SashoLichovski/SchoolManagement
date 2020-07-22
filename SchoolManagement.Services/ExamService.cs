@@ -73,7 +73,7 @@ namespace SchoolManagement.Services
         {
             var response = new ActionMessage();
             var dbExam = examRepositoty.GetById(examId);
-            EnumExam.TryParse(examType, out EnumExam result);
+            Enums.ExamType.TryParse(examType, out Enums.ExamType result);
             if (dbExam != null)
             {
                 dbExam.ExamType = result;

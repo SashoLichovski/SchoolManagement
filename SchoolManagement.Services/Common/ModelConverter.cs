@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using SchoolManagement.Data;
+using SchoolManagement.Services.ViewModels.Chat;
 using SchoolManagement.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -56,5 +57,29 @@ namespace SchoolManagement.Common
                 CreatedBy = exam.CreatedBy
             };
         }
+
+        public static ChatroomViewModel ToChatroomViewModel(this Chat chat)
+        {
+            return new ChatroomViewModel
+            {
+                Id = chat.Id,
+                Messages = chat.Messages?.Select(x => x.ToMessageViewModel()).ToList(),
+                Name = chat.Name,
+                Type = chat.ChatType
+            };
+        }
+
+        public static MessageViewModel ToMessageViewModel(this Message message)
+        {
+            return new MessageViewModel
+            {
+                Text = message.Text,
+                CreatedBy = message.CreatedBy,
+                ChatId = message.ChatId,
+                DatePosted = message.DatePosted
+            };
+        }
+
+        
     }
 }

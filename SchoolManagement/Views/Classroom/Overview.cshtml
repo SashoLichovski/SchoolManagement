@@ -59,9 +59,9 @@
                                                 <form asp-controller="Exam" asp-action="ChangeExamType">
                                                     <input hidden name="examId" value="@classroom.Exams[i].Id" />
                                                     <select name="examType">
-                                                        <option value="@EnumExam.Undefined">Undefined</option>
-                                                        <option value="@EnumExam.Essey">Essey</option>
-                                                        <option value="@EnumExam.QuestionAnswer">Question-Answer</option>
+                                                        <option value="@Enums.ExamType.Undefined">Undefined</option>
+                                                        <option value="@Enums.ExamType.Essey">Essey</option>
+                                                        <option value="@Enums.ExamType.QuestionAnswer">Question-Answer</option>
                                                     </select>
                                                     <input type="submit" class="btn btn-primary btn-sm" value="change" />
                                                 </form>

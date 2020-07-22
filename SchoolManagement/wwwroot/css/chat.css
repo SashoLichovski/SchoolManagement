@@ -11,14 +11,18 @@
     height: 500px;
     background-color: purple;
     padding: 30px;
+    overflow: auto;
 }
 
-.side-menu button {
+.side-menu a {
     width: 70px;
     height: 70px;
     margin: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        
+}
+
+.side-menu strong {
+    font-size: 2em;
 }
 
 .chat {
@@ -44,7 +48,7 @@
 
 .message {
     margin-right: 50px;
-    margin-left: 150px;
+    margin-left: 170px;
     display: flex;
     justify-content: flex-start;
     padding: 10px;
@@ -78,7 +82,7 @@
     .side-menu {
         padding: 15px;
     }
-    .side-menu button {
+    .side-menu a {
         width: 60px;
         height: 60px;
         margin: 6px;

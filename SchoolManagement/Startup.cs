@@ -58,6 +58,12 @@ namespace SchoolManagement
             services.AddTransient<IClassroomService, ClassroomService>();
             services.AddTransient<IClassroomRepository, ClassroomRepository>();
 
+            services.AddTransient<IChatService, ChatService>();
+            services.AddTransient<IChatRepository, ChatRepository>();
+
+            services.AddTransient<IMessageService, MessageService>();
+            services.AddTransient<IMessageRepository, MessageRepository>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

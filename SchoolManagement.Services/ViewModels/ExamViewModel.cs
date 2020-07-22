@@ -11,7 +11,7 @@ namespace SchoolManagement.ViewModels
         public List<string> SubjectTitles { get; set; }
         public DateTime ExamDate { get; set; }
         public DateTime ExamEnd { get; set; }
-        public EnumExam ExamType { get; set; }
+        public Enums.ExamType ExamType { get; set; }
         public string CreatedBy { get; set; }
     }
 }
