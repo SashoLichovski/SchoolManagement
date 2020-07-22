@@ -1,11 +1,12 @@
 ﻿
 @section Styles{ 
     <link rel="stylesheet" href="~/css/chat.css" />
+    <link rel="stylesheet" href="~/lib/Hover-master/css/hover.css" />
 }
 <div class="chatRoomContainer">
     <div class="side-menu">
-        <button class="btn btn-info">Room 1</button>
-        <button class="btn btn-info">Room 2</button>
+        <button class="btn btn-info hvr-bounce-in">Room 1</button>
+        <button class="btn btn-info hvr-bounce-in">Room 2</button>
     </div>
 
     <div class="chat">
@@ -14,18 +15,20 @@
             <p>Some text Some text Some text </p>
             <footer><b>@DateTime.Now.ToString("MMMM-dd, hh:mm tt")</b></footer>
         </div>
-
+        <hr />
         <div class="message">
-            <header><b>Stefan:</b></header>
+            <header><b>Sasho:</b></header>
             <p>Some text Some text Some text </p>
             <footer><b>@DateTime.Now.ToString("MMMM-dd, hh:mm tt")</b></footer>
         </div>
+        <hr />
 
         <div class="message">
-            <header><b>Stefan:</b></header>
+            <header><b>MihailMihail:</b></header>
             <p>Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text </p>
             <footer><b>@DateTime.Now.ToString("MMMM-dd, hh:mm tt")</b></footer>
         </div>
+        <hr />
 
     </div>
 

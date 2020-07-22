@@ -50,6 +50,11 @@
     padding: 10px;
 }
 
+.message header {
+    width: 60px;
+    overflow-wrap: break-word;
+}
+
 .message p {
     width: 70%;
 }
@@ -77,7 +82,12 @@
         width: 60px;
         height: 60px;
         margin: 6px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    .inputContainer {
+        padding: 10px;
+    }
+    .message header {
+        width: 55px;
     }
 }
 

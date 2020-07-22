@@ -50,8 +50,8 @@
                                 {
                                     <tr>
                                         <td>@classroom.Subjects[i]</td>
-                                        <td>@classroom.Exams[i].ExamDate.ToString("MMMM-dd-yyy hh:mm")</td>
-                                        <td>@classroom.Exams[i].ExamEnd.ToString("MMMM-dd-yyy hh:mm")</td>
+                                        <td>@classroom.Exams[i].ExamDate.ToString("MMMM-dd-yyy hh:mm tt")</td>
+                                        <td>@classroom.Exams[i].ExamEnd.ToString("MMMM-dd-yyy hh:mm tt")</td>
                                         <td>@classroom.Exams[i].ExamType</td>
                                         <td>
                                             @if (User.FindFirst(ClaimTypes.NameIdentifier).Value == classroom.Exams[i].CreatedBy || User.IsInRole("Admin"))
