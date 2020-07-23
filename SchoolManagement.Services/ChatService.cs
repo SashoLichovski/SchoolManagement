@@ -52,5 +52,10 @@ namespace SchoolManagement.Services
             var dbChat = chatRepository.GetById(chatroomId);
             return dbChat.ToChatroomViewModel();
         }
+
+        public ChatroomViewModel GetByName(string defaultRoomName)
+        {
+            return chatRepository.GetByName(defaultRoomName).ToChatroomViewModel();
+        }
     }
 }
