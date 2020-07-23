@@ -5,6 +5,14 @@
         {
             "library": "moment.js@2.27.0",
             "destination": "wwwroot/lib/MomentJs"
+        },
+        {
+            "library": "signalr.js@2.4.1",
+            "destination": "wwwroot/lib/SignalR"
+        },
+        {
+            "library": "axios@0.19.2",
+            "destination": "wwwroot/lib/Axios"
         }
     ]
 }

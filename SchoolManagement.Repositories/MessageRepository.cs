@@ -1,8 +1,6 @@
 ﻿using SchoolManagement.Data;
 using SchoolManagement.Repositories.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace SchoolManagement.Repositories
 {
@@ -15,10 +13,10 @@ namespace SchoolManagement.Repositories
             this.context = context;
         }
 
-        public void Add(Message message)
+        public async Task Add(Message message)
         {
             context.Messages.Add(message);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
     }
 }

@@ -10,5 +10,6 @@ namespace SchoolManagement.Repositories.Interfaces
         void Add(Chat chat);
         Chat GetByName(string roomName);
         List<Chat> GetAll();
+        Chat GetById(int chatroomId);
     }
 }
