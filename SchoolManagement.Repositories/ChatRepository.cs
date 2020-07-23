@@ -30,6 +30,13 @@ namespace SchoolManagement.Repositories
                 .ToList();
         }
 
+        public Chat GetById(int chatroomId)
+        {
+            return context.Chats
+                .Include(x => x.Messages)
+                .FirstOrDefault(x => x.Id.Equals(chatroomId));
+        }
+
         public Chat GetByName(string roomName)
         {
             return context.Chats.FirstOrDefault(x => x.Name.Equals(roomName));

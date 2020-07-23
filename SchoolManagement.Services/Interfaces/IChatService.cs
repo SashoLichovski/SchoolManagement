@@ -10,5 +10,6 @@ namespace SchoolManagement.Services.Interfaces
     {
         ActionMessage Create(string roomName);
         List<ChatroomViewModel> GetAll();
+        ChatroomViewModel GetById(int chatroomId);
     }
 }

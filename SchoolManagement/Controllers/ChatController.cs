@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SchoolManagement.Services.Interfaces;
 using SchoolManagement.Services.ViewModels.Chat;
-using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace SchoolManagement.Controllers
 {
+    [Authorize]
     public class ChatController : Controller
     {
         private readonly IChatService chatService;
@@ -51,7 +53,7 @@ namespace SchoolManagement.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateMessage(int chatroomId, string text)
+        public async Task<IActionResult> CreateMessage(int chatroomId, string text)
         {
             if (string.IsNullOrEmpty(text))
             {
@@ -60,7 +62,7 @@ namespace SchoolManagement.Controllers
             else
             {
                 string username = User.Identity.Name;
-                messageService.Create(username, chatroomId, text);
+                await messageService.Create(username, chatroomId, text);
                 return RedirectToAction("JoinRoom", new { ChatroomId = chatroomId });
             }
         }

@@ -45,6 +45,8 @@ namespace SchoolManagement
                 options.Password.RequireNonAlphanumeric = true;
             });
 
+            services.AddSignalR();
+
             services.AddTransient<IExamService, ExamService>();
             services.AddTransient<IExamRepositoty, ExamRepositoty>();
 
@@ -85,6 +87,11 @@ namespace SchoolManagement
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
+
+            app.UseSignalR(routes =>
+            {
+
+            });
 
             app.UseMvc(routes =>
             {
