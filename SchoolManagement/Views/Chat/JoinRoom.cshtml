@@ -1,0 +1,55 @@
+﻿@model SchoolManagement.Services.ViewModels.Chat.JoinRoomViewModel
+
+@section Styles{ 
+    <link rel="stylesheet" href="~/css/chat.css" />
+    <link rel="stylesheet" href="~/lib/Hover-master/css/hover.css" />
+}
+<div class="chatRoomContainer">
+    <div class="side-menu">
+        <a class="btn btn-primary hvr-bounce-in" asp-action="CreateRoom"><strong>+</strong></a>
+        @foreach (var chatRoom in Model.Chatrooms)
+        {
+            <a class="btn btn-info hvr-bounce-in" asp-action="JoinRoom" asp-route-chatroomId="@chatRoom.Id">@chatRoom.Name</a>
+        }
+    </div>
+
+    <div class="chat" id="chat">
+        @if (Model.ChatroomId == 0)
+        {
+
+            @foreach (var message in Model.Chatrooms.FirstOrDefault(x => x.Name == "General").Messages)
+            {
+                <div class="message">
+                    <header><b>@message.CreatedBy:</b></header>
+                    <p>@message.Text</p>
+                    <footer><b>@message.DatePosted.ToString("MMMM-dd, hh:mm tt")</b></footer>
+                </div>
+                <hr />
+            }
+        }
+        else
+        {
+            @foreach (var message in Model.Chatrooms.FirstOrDefault(x => x.Id == Model.ChatroomId).Messages)
+            {
+                <div class="message">
+                    <header><b>@message.CreatedBy:</b></header>
+                    <p>@message.Text</p>
+                    <footer><b>@message.DatePosted.ToString("MMMM-dd, hh:mm tt")</b></footer>
+                </div>
+                <hr />
+            }
+        }
+    </div>
+
+    <div class="inputContainer">
+        <form asp-action="CreateMessage" method="post">
+            <input hidden name="chatroomId" value="@Model.ChatroomId" />
+            <input class="form-control" name="text" />
+            <input type="submit" class="btn btn-success" value="Send" />
+        </form>
+    </div>
+</div>
+
+@section Scripts{ 
+    <script src="~/js/chat.js"></script>
+}

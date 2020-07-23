@@ -6,7 +6,7 @@ namespace SchoolManagement.Controllers
 {
     public class DashboardController : Controller
     {
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Professor")]
         public IActionResult AdminMenu()
         {
             return View();

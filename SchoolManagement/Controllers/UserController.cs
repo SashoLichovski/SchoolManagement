@@ -18,12 +18,14 @@ namespace SchoolManagement.Controllers
             this.userManager = userManager;
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Register()
         {
             InputRegisterModel model = new InputRegisterModel();
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Register(InputRegisterModel model)
         {

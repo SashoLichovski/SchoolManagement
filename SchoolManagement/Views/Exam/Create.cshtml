@@ -1,0 +1,36 @@
+﻿@model SchoolManagement.ViewModels.ExamViewModel
+
+<div class="container">
+    <br />
+    <h3>Schedule exam</h3>
+    <hr />
+
+    <div class="col-md-6">
+        <form asp-action="CreateExam" method="post">
+            <input hidden name="userId" value="@User.FindFirst(ClaimTypes.NameIdentifier).Value" />
+            <label>Select subject</label>
+            <input hidden name="classroomId" value="@Model.ClassroomId" />
+            <select class="form-control" name="subjectTitle">
+                @foreach (var subject in Model.SubjectTitles)
+                {
+                    <option value="@subject">@subject</option>
+                }
+            </select>
+            <span></span>
+            <br />
+            <label name="examDate">Exam start</label>
+            <input class="form-control" name="examStart" type="datetime-local" min="@DateTime.Now.AddDays(15).ToString("yyyy-MM-ddThh:mm")" id="startDate" onchange="setTime()"/>
+            <br />
+            <label name="examEnd">Exam end</label>
+            <input class="form-control" name="examEnd" type="datetime-local" id="endDate"/>
+            <br />
+            <input class="btn btn-primary" type="submit" value="Add" />
+        </form>
+    </div>
+    
+</div>
+
+@section Scripts{ 
+    <script src="~/lib/MomentJs/moment.js"></script>
+    <script src="~/js/exam.js"></script>
+}

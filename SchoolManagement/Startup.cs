@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SchoolManagement.Models;
+using SchoolManagement.Data;
 using SchoolManagement.Repositories;
 using SchoolManagement.Repositories.Interfaces;
 using SchoolManagement.Services;
@@ -45,6 +45,9 @@ namespace SchoolManagement
                 options.Password.RequireNonAlphanumeric = true;
             });
 
+            services.AddTransient<IExamService, ExamService>();
+            services.AddTransient<IExamRepositoty, ExamRepositoty>();
+
             services.AddTransient<ISubjectService,SubjectService>();
             services.AddTransient<ISubjectRepository, SubjectRepository>();
 
@@ -54,6 +57,12 @@ namespace SchoolManagement
 
             services.AddTransient<IClassroomService, ClassroomService>();
             services.AddTransient<IClassroomRepository, ClassroomRepository>();
+
+            services.AddTransient<IChatService, ChatService>();
+            services.AddTransient<IChatRepository, ChatRepository>();
+
+            services.AddTransient<IMessageService, MessageService>();
+            services.AddTransient<IMessageRepository, MessageRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

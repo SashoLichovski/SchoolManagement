@@ -7,10 +7,13 @@
 }
 
 <div class="container">
-    <br />
-    <a class="btn btn-primary" asp-action="Create">Create classroom</a>
-    <hr />
-    <br />
+    @if (User.IsInRole("Admin"))
+    {
+        <br />
+        <a class="btn btn-primary" asp-action="Create">Create classroom</a>
+        <hr />
+        <br />
+    }
     <table class="table table-striped table-dark">
         <thead>
             <tr>
@@ -26,7 +29,7 @@
                     <td>@classroom.RoomNumber</td>
                     <td>@classroom.Capacity</td>
                     <td style="text-align:center">
-                        <a class="btn btn-primary btn-sm" asp-action="CreateExam" asp-route-classroomId="@classroom.Id">Add exam</a> |
+                        <a class="btn btn-primary btn-sm" asp-controller="Exam" asp-action="Create" asp-route-classroomId="@classroom.Id">Add exam</a> |
                         <button class="btn btn-info btn-sm" id="@classroom.Id" onclick="toggle(event)">Schedule</button>
                     </td>
                 </tr>
@@ -40,13 +43,30 @@
                                     <th>Subject</th>
                                     <th>Exam start</th>
                                     <th>Exam end</th>
+                                    <th>Exam type</th>
+                                    <th>Actions</th>
                                 </tr>
                                 @for (int i = 0; i < classroom.Subjects.Count; i++)
                                 {
                                     <tr>
                                         <td>@classroom.Subjects[i]</td>
-                                        <td>@classroom.Exams[i].ExamDate.ToString("MMMM-dd-yyy hh:mm")</td>
-                                        <td>@classroom.Exams[i].ExamEnd.ToString("MMMM-dd-yyy hh:mm")</td>
+                                        <td>@classroom.Exams[i].ExamDate.ToString("MMMM-dd-yyy hh:mm tt")</td>
+                                        <td>@classroom.Exams[i].ExamEnd.ToString("MMMM-dd-yyy hh:mm tt")</td>
+                                        <td>@classroom.Exams[i].ExamType</td>
+                                        <td>
+                                            @if (User.FindFirst(ClaimTypes.NameIdentifier).Value == classroom.Exams[i].CreatedBy || User.IsInRole("Admin"))
+                                            {
+                                                <form asp-controller="Exam" asp-action="ChangeExamType">
+                                                    <input hidden name="examId" value="@classroom.Exams[i].Id" />
+                                                    <select name="examType">
+                                                        <option value="@Enums.ExamType.Undefined">Undefined</option>
+                                                        <option value="@Enums.ExamType.Essey">Essey</option>
+                                                        <option value="@Enums.ExamType.QuestionAnswer">Question-Answer</option>
+                                                    </select>
+                                                    <input type="submit" class="btn btn-primary btn-sm" value="change" />
+                                                </form>
+                                            }
+                                        </td>
                                     </tr>
                                 }
                             </table>

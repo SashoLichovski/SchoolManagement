@@ -16,7 +16,7 @@ namespace SchoolManagement.Controllers
 
         public IActionResult Login()
         {
-            if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("AdminMenu", "Dashboard");
             }

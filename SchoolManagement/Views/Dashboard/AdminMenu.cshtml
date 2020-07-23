@@ -10,33 +10,41 @@
     <h3>Dashboard menu</h3>
     <hr />
 <div class="container flex">
-    <a asp-controller="Role" asp-action="CreateRole" class="link hvr-grow">
-        <div >
-            <h4>Create roles</h4>
-            <i class="fas fa-user-tag"></i>
-        </div>
-    </a>
+    @if (User.IsInRole("Professor") || User.IsInRole("Admin"))
+    {
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-controller="Role" asp-action="CreateRole" class="link hvr-grow">
+                <div >
+                    <h4>Create roles</h4>
+                    <i class="fas fa-user-tag"></i>
+                </div>
+            </a>
 
-    <a asp-controller="User" asp-action="ManageUsers" class="link  hvr-grow">
-        <div >
-            <h4>Manage users</h4>
-            <i class="fas fa-address-card"></i>
-        </div>
-    </a>
+            <a asp-controller="User" asp-action="ManageUsers" class="link  hvr-grow">
+                <div >
+                    <h4>Manage users</h4>
+                    <i class="fas fa-address-card"></i>
+                </div>
+            </a>
 
-    <a asp-controller="Subject" asp-action="Overview" class="link  hvr-grow">
-        <div >
-            <h4>Manage Subjects</h4>
-            <i class="fas fa-atlas"></i>
-        </div>
-    </a>
+            <a asp-controller="Subject" asp-action="Overview" class="link  hvr-grow">
+                <div >
+                    <h4>Manage Subjects</h4>
+                    <i class="fas fa-atlas"></i>
+                </div>
+            </a>
+        }
 
-    <a asp-controller="Classroom" asp-action="Overview" class="link  hvr-grow">
-        <div >
-            <h4>Manage Classrooms</h4>
-            <i class="fas fa-person-booth"></i>
-        </div>
-    </a>
+        
+        <a asp-controller="Classroom" asp-action="Overview" class="link  hvr-grow">
+            <div >
+                <h4>Manage Classrooms</h4>
+                <i class="fas fa-person-booth"></i>
+            </div>
+        </a>
+    }
+    
 </div>
 
 

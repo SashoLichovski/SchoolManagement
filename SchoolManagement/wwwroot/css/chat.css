@@ -1,0 +1,97 @@
+﻿
+.chatRoomContainer {
+    background-color: red;
+    height: 500px;
+}
+
+.side-menu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    background-color: purple;
+    padding: 30px;
+    overflow: auto;
+}
+
+.side-menu a {
+    width: 70px;
+    height: 70px;
+    margin: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.side-menu strong {
+    font-size: 2em;
+}
+
+.chat {
+    height: 500px;
+    width: 100%;
+    background-color: forestgreen;
+    overflow: auto;
+}
+
+.inputContainer {
+    padding: 20px;
+    width: 100%;
+    background-color: black;
+}
+
+.inputContainer form {
+    display: flex;
+}
+
+.inputContainer form input {
+    margin: 10px;
+}
+
+.message {
+    margin-right: 50px;
+    margin-left: 170px;
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px;
+}
+
+.message header {
+    width: 60px;
+    overflow-wrap: break-word;
+}
+
+.message p {
+    width: 70%;
+}
+
+.message header, footer, p{
+    margin-right: 20px;
+}
+
+
+@media only screen and (max-width : 1000px) {
+    .message p {
+        width: 90%;
+    }
+    .message header, footer, p {
+        margin-right: 5px;
+    }
+    .message {
+        margin-right: 10px;
+        margin-left: 100px;
+    }
+    .side-menu {
+        padding: 15px;
+    }
+    .side-menu a {
+        width: 60px;
+        height: 60px;
+        margin: 6px;
+    }
+    .inputContainer {
+        padding: 10px;
+    }
+    .message header {
+        width: 55px;
+    }
+}
+

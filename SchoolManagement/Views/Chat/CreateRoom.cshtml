@@ -1,0 +1,17 @@
+﻿<h3>Create chat room</h3>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="CreateRoom" method="post">
+            <div class="form-group">
+                <label for="roomName" class="control-label">Room name</label>
+                <input name="roomName" class="form-control" />
+            </div>
+            <input class="btn btn-primary" type="submit" value="Create" />
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ChatRooms">Back to List</a>
+</div>

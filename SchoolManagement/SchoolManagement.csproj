@@ -12,4 +12,14 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\MomentJs\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\SchoolManagement.Services\SchoolManagement.Services.csproj" />
+  </ItemGroup>
+
 </Project>
