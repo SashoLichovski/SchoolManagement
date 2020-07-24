@@ -99,8 +99,17 @@
     cursor: pointer;
 }
 
+.bars {
+    display: none;
+}
+
 
 @media only screen and (max-width : 900px) {
+    .bars {
+        display: initial;
+        font-size: 2.2em;
+        cursor: pointer;
+    }
     .message p {
         width: 90%;
     }
@@ -112,9 +121,12 @@
         margin-left: 10px;
     }
     .side-menu {
+        display: none;
         padding: 15px;
         position: initial;
         height: 200px;
+        text-align: center;
+        background-color: black;
     }
     .side-menu a {
         width: 80%;

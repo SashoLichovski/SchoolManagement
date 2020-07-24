@@ -17,9 +17,13 @@
     </form>
 </div>
 
+
 <div class="chatRoomContainer">
-    <div class="side-menu">
-        <a class="btn btn-primary hvr-bounce-in" onclick="toggleForm()"><strong>+</strong></a>
+    <div class="bars" onclick="toggleSideMenu()">
+        <i class="fas fa-bars"></i>
+    </div>
+    <div class="side-menu" id="sideMenu">
+        <a class="btn btn-primary hvr-grow" onclick="toggleForm()"><strong>+</strong></a>
         @foreach (var chatRoom in Model.Chatrooms)
         {
             <a class="btn btn-info hvr-grow" asp-action="JoinRoom" asp-route-chatroomId="@chatRoom.Id">@chatRoom.Name</a>
