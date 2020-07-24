@@ -27,3 +27,29 @@ function disableButton() {
         document.getElementById("formBtn").disabled = true;
     }
 }
+
+var sideMenu = document.getElementById("sideMenu");
+function toggleSideMenu() {
+    if (sideMenu.style.display == "") {
+        sideMenu.style.display = "flex";
+    }
+    else if (sideMenu.style.display == "flex")
+    {
+        sideMenu.style.display = "none";
+    }
+    else
+    {
+        sideMenu.style.display = "flex";
+    }
+
+}
+
+
+var mediaQuery = window.matchMedia("(min-width : 900px)");
+window.addEventListener("resize", function () {
+    if (mediaQuery.matches) {
+        sideMenu.style.display = "flex";
+    } else if (!mediaQuery.matches) {
+        sideMenu.style.display = "none";
+    }
+})
