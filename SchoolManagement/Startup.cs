@@ -35,7 +35,7 @@ namespace SchoolManagement
 
             services.AddDbContext<SchoolManagementDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SchoolManagementDb")));
 
-            services.AddIdentity<IdentityUser,IdentityRole>()
+            services.AddIdentity<User,IdentityRole>()
                 .AddEntityFrameworkStores<SchoolManagementDbContext>();
 
             services.Configure<IdentityOptions>(options =>

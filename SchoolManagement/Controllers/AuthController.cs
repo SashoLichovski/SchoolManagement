@@ -32,7 +32,6 @@ namespace SchoolManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Dodaj Logika ako userot ne postoi
                 ActionMessage response = await authService.SignInAsync(model);
                 return RedirectToAction("ActionMessage", "Dashboard", response);
             }
