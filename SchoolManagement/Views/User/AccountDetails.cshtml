@@ -9,7 +9,15 @@
     <p>Id: @Model.UserId</p>
     <p>UserName: @Model.UserName</p>
     <p>Email: @Model.Email</p>
-    <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.UserImage)" width="200" height="120" style="border-radius:100%;"/>
+    @if (Model.UserImage == null)
+    {
+        <a href="#">Add image</a>
+    }
+    else
+    {
+        <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.UserImage)" width="200" height="200" style="border-radius:100%;" />
+    }
+    <br />
+    <br />
+    <a asp-controller="User" asp-action="Edit" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value" class="btn btn-primary">Edit info</a>
 </div>
-
-<a asp-controller="User" asp-action="Edit" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value" class="btn btn-primary">Edit</a>

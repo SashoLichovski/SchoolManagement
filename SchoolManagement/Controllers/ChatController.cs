@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using SchoolManagement.Services.Interfaces;
 using SchoolManagement.Services.ViewModels.Chat;
 using System.Threading.Tasks;
@@ -11,11 +12,13 @@ namespace SchoolManagement.Controllers
     {
         private readonly IChatService chatService;
         private readonly IMessageService messageService;
+        private readonly IConfiguration config;
 
-        public ChatController(IChatService chatService, IMessageService messageService)
+        public ChatController(IChatService chatService, IMessageService messageService, IConfiguration config)
         {
             this.chatService = chatService;
             this.messageService = messageService;
+            this.config = config;
         }
 
         public IActionResult JoinRoom(int chatroomId)
@@ -28,6 +31,10 @@ namespace SchoolManagement.Controllers
             if (chatroomId != 0)
             {
                 model.ChatroomId = chatroomId;
+            }
+            else
+            {
+                model.ChatroomId = chatService.GetByName(config["DefaultChatroom"]).Id; 
             }
             return View(model);
         }

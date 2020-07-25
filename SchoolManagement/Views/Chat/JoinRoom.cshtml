@@ -1,5 +1,4 @@
 ﻿@model SchoolManagement.Services.ViewModels.Chat.JoinRoomViewModel
-@inject IConfiguration  configuration
 
 @section Styles{
     <link rel="stylesheet" href="~/css/chat.css" />
@@ -39,19 +38,6 @@
 
     <div class="chatContainer">
         <div class="messageContainer" id="chat">
-            @if (Model.ChatroomId == 0)
-            {
-                @foreach (var message in Model.Chatrooms.FirstOrDefault(x => x.Name == configuration["DefaultChatroom"]).Messages)
-                {
-                    <div class="message" >
-                        <header><b>@message.CreatedBy:</b></header>
-                        <p>@message.Text</p>
-                        <footer><b>@message.DatePosted.ToString("MMMM-dd, hh:mm tt")</b></footer>
-                    </div>
-                }
-            }
-            else
-            {
                 @foreach (var message in Model.Chatrooms.FirstOrDefault(x => x.Id == Model.ChatroomId).Messages)
                 {
                     <div class="message">
@@ -60,67 +46,18 @@
                         <footer><b>@message.DatePosted.ToString("MMMM-dd, hh:mm tt")</b></footer>
                     </div>
                 }
-            }
         </div>
 
 
         <div class="inputContainer">
             <form asp-action="CreateMessage" method="post">
                 <input hidden name="chatroomId" value="@Model.ChatroomId" />
-                <input name="text" placeholder="Write something..." />
+                <input name="text" placeholder="Write something to @Model.Chatrooms.FirstOrDefault(x => x.Id == Model.ChatroomId).Name room..." />
                 <button type="submit" class="btn btn-success">Send</button>
             </form>
         </div>
     </div>
 </div>
-
-@*<div class="chatRoomContainer">
-    <div class="bars" onclick="toggleSideMenu()">
-        <i class="fas fa-bars"></i>
-    </div>
-    <div class="side-menu" id="sideMenu">
-        <a class="btn btn-primary hvr-grow" onclick="toggleForm()"><strong>+</strong></a>
-        @foreach (var chatRoom in Model.Chatrooms)
-        {
-            <a class="btn btn-info hvr-grow" asp-action="JoinRoom" asp-route-chatroomId="@chatRoom.Id">@chatRoom.Name</a>
-        }
-    </div>
-
-    <div class="chat" id="chat">
-        @if (Model.ChatroomId == 0)
-        {
-            @foreach (var message in Model.Chatrooms.FirstOrDefault(x => x.Name == configuration["DefaultChatroom"]).Messages)
-            {
-                <div class="message">
-                    <header><b>@message.CreatedBy:</b></header>
-                    <p>@message.Text</p>
-                    <footer><b>@message.DatePosted.ToString("MMMM-dd, hh:mm tt")</b></footer>
-                </div>
-                <hr />
-            }
-        }
-        else
-        {
-            @foreach (var message in Model.Chatrooms.FirstOrDefault(x => x.Id == Model.ChatroomId).Messages)
-            {
-                <div class="message">
-                    <header><b>@message.CreatedBy:</b></header>
-                    <p>@message.Text</p>
-                    <footer><b>@message.DatePosted.ToString("MMMM-dd, hh:mm tt")</b></footer>
-                </div>
-                <hr />
-            }
-        }
-    </div>
-
-    <div class="inputContainer">
-        <form asp-action="CreateMessage" method="post">
-            <input hidden name="chatroomId" value="@Model.ChatroomId" />
-            <input class="form-control" name="text" />
-            <input type="submit" class="btn btn-success" value="Send" />
-        </form>
-    </div>
-</div>*@
 
 @section Scripts{
     <script src="~/lib/Axios/axios.js"></script>

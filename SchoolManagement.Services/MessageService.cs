@@ -14,25 +14,14 @@ namespace SchoolManagement.Services
     public class MessageService : IMessageService
     {
         private readonly IMessageRepository messageRepository;
-        private readonly IConfiguration configuration;
-        private readonly IChatService chatService;
 
-        public MessageService(IMessageRepository messageRepository, IConfiguration configuration,IChatService chatService)
+        public MessageService(IMessageRepository messageRepository)
         {
             this.messageRepository = messageRepository;
-            this.configuration = configuration;
-            this.chatService = chatService;
         }
 
         public async Task<MessageViewModel> Create(string username, int chatroomId, string text)
         {
-            if (chatroomId == 0)
-            {
-                //chatroomId = 1;
-                var defaultRoomName = configuration["DefaultChatroom"];
-                var chatRoom = chatService.GetByName(defaultRoomName);
-                chatroomId = chatRoom.Id;
-            }
             var message = new Message()
             {
                 Text = text,
