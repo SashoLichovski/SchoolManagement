@@ -17,8 +17,64 @@
     </form>
 </div>
 
+<div class="chatRoomContainer" >
 
-<div class="chatRoomContainer">
+        <div class="bars" onclick="toggleSideMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+    <div class="sideMenuContainer" id="sideMenu">
+
+        <div class="roomName">
+            <div class="addBtn">
+                <button class="btn" onclick="toggleForm()"><strong>+</strong></button>
+            </div>
+            @foreach (var chatRoom in Model.Chatrooms)
+            {
+                <a asp-action="JoinRoom" asp-route-chatroomId="@chatRoom.Id">
+                    <div class="roomLink hvr-grow" id="activeColor">@chatRoom.Name</div>
+                </a>
+            }
+        </div>
+    </div>
+
+    <div class="chatContainer">
+        <div class="messageContainer" id="chat">
+            @if (Model.ChatroomId == 0)
+            {
+                @foreach (var message in Model.Chatrooms.FirstOrDefault(x => x.Name == configuration["DefaultChatroom"]).Messages)
+                {
+                    <div class="message" >
+                        <header><b>@message.CreatedBy:</b></header>
+                        <p>@message.Text</p>
+                        <footer><b>@message.DatePosted.ToString("MMMM-dd, hh:mm tt")</b></footer>
+                    </div>
+                }
+            }
+            else
+            {
+                @foreach (var message in Model.Chatrooms.FirstOrDefault(x => x.Id == Model.ChatroomId).Messages)
+                {
+                    <div class="message">
+                        <header><b>@message.CreatedBy:</b></header>
+                        <p>@message.Text</p>
+                        <footer><b>@message.DatePosted.ToString("MMMM-dd, hh:mm tt")</b></footer>
+                    </div>
+                }
+            }
+        </div>
+
+
+        <div class="inputContainer">
+            <form asp-action="CreateMessage" method="post">
+                <input hidden name="chatroomId" value="@Model.ChatroomId" />
+                <input name="text" placeholder="Write something..." />
+                <button type="submit" class="btn btn-success">Send</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@*<div class="chatRoomContainer">
     <div class="bars" onclick="toggleSideMenu()">
         <i class="fas fa-bars"></i>
     </div>
@@ -64,7 +120,7 @@
             <input type="submit" class="btn btn-success" value="Send" />
         </form>
     </div>
-</div>
+</div>*@
 
 @section Scripts{
     <script src="~/lib/Axios/axios.js"></script>

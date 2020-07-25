@@ -30,26 +30,34 @@ function disableButton() {
 
 var sideMenu = document.getElementById("sideMenu");
 function toggleSideMenu() {
-    if (sideMenu.style.display == "") {
-        sideMenu.style.display = "flex";
+    if (sideMenu.style.height == "") {
+        sideMenu.style.height = "300px";
+        sideMenu.style.overflow = "auto";
     }
-    else if (sideMenu.style.display == "flex")
-    {
-        sideMenu.style.display = "none";
+    else if (sideMenu.style.height == "300px") {
+        sideMenu.style.height = "0px";
+        sideMenu.style.overflow = "hidden";
     }
-    else
-    {
-        sideMenu.style.display = "flex";
+    else if (sideMenu.style.height == "0px"){
+        sideMenu.style.height = "300px";
+        sideMenu.style.overflow = "auto";
     }
 
 }
 
 
-var mediaQuery = window.matchMedia("(min-width : 900px)");
+var mediaQuery = window.matchMedia("(min-width : 1000px)");
 window.addEventListener("resize", function () {
     if (mediaQuery.matches) {
-        sideMenu.style.display = "flex";
+        sideMenu.style.height = "100%";
+        sideMenu.style.overflow = "auto";
     } else if (!mediaQuery.matches) {
-        sideMenu.style.display = "none";
+        sideMenu.style.height = "0px";
+        sideMenu.style.overflow = "hidden";
     }
+
+    //var body = document.getElementById("body");
+    //var chat = document.getElementById("chat");
+    //chat.style.height = body.style.height;
+    //sideMenu.style.height = body.style.height;
 })

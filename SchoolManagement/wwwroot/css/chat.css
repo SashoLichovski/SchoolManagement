@@ -1,5 +1,198 @@
-﻿
+﻿html, body {
+    margin: 0;
+    height: 100% !important;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.addBtn {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 10px;
+}
+    .addBtn button {
+        width: 100%;
+        font-size: 2em;
+        background-color: #ff9c07;
+    }
+
 .chatRoomContainer {
+    width: 100%;
+    height: 93.5vh;
+    display: flex;
+}
+
+.sideMenuContainer {
+    width: 18%;
+    height: 100%;
+    background-color: whitesmoke;
+    overflow: auto;
+}
+    .sideMenuContainer::-webkit-scrollbar {
+        width: 12px;
+    }
+    .sideMenuContainer::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+    }
+    .sideMenuContainer::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgb(0, 0, 0);
+    }
+
+.roomLink {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    color: black;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+    .roomLink:hover {
+        background-color: #ff9c07;
+        text-decoration: none;
+        
+    }
+
+.chatContainer {
+    width: 100%;
+/*    height: 500px;*/
+    background-color: #eaeaea;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.messageContainer {
+    overflow: auto;
+}
+    .messageContainer::-webkit-scrollbar {
+        width: 20px;
+    }
+
+    .messageContainer::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+        border-radius: 10px;
+    }
+
+    .messageContainer::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgb(0, 0, 0);
+    }
+
+.message {
+    display: flex;
+    padding: 10px;
+    margin: 10px;
+    background-color: #5cd6ff91;
+    border-radius: 20px;
+}
+    .message header {
+        width: 11%;
+    }
+    .message p {
+        width: 70%;
+        margin-right: 10px;
+    }
+
+.inputContainer {
+    padding: 20px;
+}
+    .inputContainer input {
+        width: 80%;
+        padding: 10px;
+        border: 1px solid white;
+        border-radius: 20px;
+        margin-right: 15px;
+    }
+    .inputContainer button {
+        padding: 10px;
+        border-radius: 20px;
+        width: 15%;
+    }
+
+.hide {
+    display: none;
+}
+
+.addRoom {
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    text-align: center;
+    height: 100%;
+    top: 0;
+    display: flex;
+    background-color: rgba(0,0,0,0.7);
+}
+    .addRoom form {
+        width: 30%;
+        margin: auto;
+        padding: 15px;
+        background-color: #a9ce4f;
+        border-radius: 8px;
+    }
+    .addRoom label {
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+
+#closeForm {
+    font-size: 1.7em;
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+}
+
+.bars {
+    display: none;
+}
+
+
+@media only screen and (max-height : 855px){
+    .chatRoomContainer {
+        height: 92.5vh;
+    }
+}
+@media only screen and (max-height : 530px) {
+    .chatRoomContainer {
+        height: 88.5vh;
+    }
+}
+
+@media only screen and (max-width : 1000px){
+    .bars {
+        display: initial;
+        font-size: 2.2em;
+        cursor: pointer;
+        margin-left: 20px;
+    }
+    .sideMenuContainer {
+        background-color: white;
+        height: 0;
+        overflow: auto;
+        width: 100%;
+    }
+    .addRoom form {
+        width: 60%;
+    }
+    .chatRoomContainer {
+        display: block;
+    }
+    .chatContainer {
+        height: 90%;
+    }
+    .message {
+        display: block;
+    }
+    .message p {
+        padding: 10px;
+    }
+}
+
+/*-----------OLD CSS-------------*/
+/*.chatRoomContainer {
     padding: 20px;
 }
 
@@ -101,10 +294,10 @@
 
 .bars {
     display: none;
-}
+}*/
 
 
-@media only screen and (max-width : 900px) {
+/*@media only screen and (max-width : 900px) {
     .bars {
         display: initial;
         font-size: 2.2em;
@@ -139,5 +332,5 @@
     .addRoom form {
         width: 80%;
     }
-}
+}*/
 
