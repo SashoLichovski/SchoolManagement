@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SchoolManagement.Data;
 using SchoolManagement.Services.Interfaces;
+using SchoolManagement.Services.ViewModels;
 using SchoolManagement.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -81,6 +82,23 @@ namespace SchoolManagement.Controllers
         }
         [HttpPost]
         public async Task<IActionResult> Edit(AccountDetailsModel model, List<IFormFile> UserImage)
+        {
+            if (ModelState.IsValid)
+            {
+                ActionMessage response = await userService.UpdateAsync(model, UserImage);
+                return RedirectToAction("ActionMessage", "Dashboard", response);
+            }
+            return View(model);
+        }
+
+        public async Task<IActionResult> AddImage(string userId)
+        {
+            AccountDetailsModel model = await userService.GetById(userId);
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddImage(AccountDetailsModel model, List<IFormFile> UserImage)
         {
             if (ModelState.IsValid)
             {

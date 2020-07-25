@@ -20,6 +20,7 @@
                 <th>Roles</th>
                 <th>Manage Roles</th>
                 <th>Delete Accounts</th>
+                <th>Edit Accounts</th>
             </tr>
         </thead>
         <tbody>
@@ -52,6 +53,9 @@
                     </td>
                     <td>
                         <a asp-controller="User" asp-action="DeleteUser" asp-route-userId="@user.Id" onclick="return confirm('Are you sure you want to delete @user.UserName?')">Delete</a>
+                    </td>
+                    <td>
+                        <a asp-controller="User" asp-action="Edit" asp-route-userId="@user.Id">Edit</a>
                     </td>
                 </tr>
             }

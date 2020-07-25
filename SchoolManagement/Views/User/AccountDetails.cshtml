@@ -11,7 +11,8 @@
     <p>Email: @Model.Email</p>
     @if (Model.UserImage == null)
     {
-        <a href="#">Add image</a>
+        <a asp-controller="User" asp-action="AddImage" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value">Add image</a>
+        
     }
     else
     {
