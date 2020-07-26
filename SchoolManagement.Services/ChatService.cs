@@ -1,4 +1,5 @@
-﻿using SchoolManagement.Common;
+﻿using Microsoft.Extensions.Configuration;
+using SchoolManagement.Common;
 using SchoolManagement.Data;
 using SchoolManagement.Repositories.Interfaces;
 using SchoolManagement.Services.Interfaces;
@@ -14,10 +15,12 @@ namespace SchoolManagement.Services
     public class ChatService : IChatService
     {
         private readonly IChatRepository chatRepository;
+        private readonly IConfiguration configuration;
 
-        public ChatService(IChatRepository chatRepository)
+        public ChatService(IChatRepository chatRepository, IConfiguration configuration)
         {
             this.chatRepository = chatRepository;
+            this.configuration = configuration;
         }
 
         public ActionMessage Create(string roomName)
@@ -56,6 +59,24 @@ namespace SchoolManagement.Services
         public ChatroomViewModel GetByName(string defaultRoomName)
         {
             return chatRepository.GetByName(defaultRoomName).ToChatroomViewModel();
+        }
+
+        public JoinRoomViewModel GetRoomModel(int chatroomId)
+        {
+            var modelList = GetAll();
+            var model = new JoinRoomViewModel()
+            {
+                Chatrooms = modelList
+            };
+            if (chatroomId != 0)
+            {
+                model.ChatroomId = chatroomId;
+            }
+            else
+            {
+                model.ChatroomId = GetByName(configuration["DefaultChatroom"]).Id;
+            }
+            return model;
         }
     }
 }

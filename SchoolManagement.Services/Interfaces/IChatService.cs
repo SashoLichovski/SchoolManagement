@@ -12,5 +12,6 @@ namespace SchoolManagement.Services.Interfaces
         List<ChatroomViewModel> GetAll();
         ChatroomViewModel GetById(int chatroomId);
         ChatroomViewModel GetByName(string defaultRoomName);
+        JoinRoomViewModel GetRoomModel(int chatroomId);
     }
 }

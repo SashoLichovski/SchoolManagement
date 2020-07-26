@@ -25,9 +25,9 @@ connection.on("ReceiveMessage", function (data) {
     updateScroll();
 })
 
-var roomId = document.getElementById("chatroomId").value;
 var joinRoom = function () {
-    axios.post(`/ChatConnection/JoinRoom/${_connectionId}/${roomId}`)
+    var chatroomName = document.getElementById("chatroomName").value;
+    axios.post(`/ChatConnection/JoinRoom/${_connectionId}/${chatroomName}`)
         .then(res => {
             console.log("It works");
         })

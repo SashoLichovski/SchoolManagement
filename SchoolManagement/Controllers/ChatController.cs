@@ -12,30 +12,16 @@ namespace SchoolManagement.Controllers
     {
         private readonly IChatService chatService;
         private readonly IMessageService messageService;
-        private readonly IConfiguration config;
 
-        public ChatController(IChatService chatService, IMessageService messageService, IConfiguration config)
+        public ChatController(IChatService chatService, IMessageService messageService)
         {
             this.chatService = chatService;
             this.messageService = messageService;
-            this.config = config;
         }
 
         public IActionResult JoinRoom(int chatroomId)
         {
-            var list = chatService.GetAll();
-            var model = new JoinRoomViewModel()
-            {
-                Chatrooms = list
-            };
-            if (chatroomId != 0)
-            {
-                model.ChatroomId = chatroomId;
-            }
-            else
-            {
-                model.ChatroomId = chatService.GetByName(config["DefaultChatroom"]).Id; 
-            }
+            var model = chatService.GetRoomModel(chatroomId);
             return View(model);
         }
 
@@ -56,21 +42,6 @@ namespace SchoolManagement.Controllers
             else
             {
                 return RedirectToAction("ActionMessage", "Dashboard", resposne);
-            }
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> CreateMessage(int chatroomId, string text)
-        {
-            if (string.IsNullOrEmpty(text))
-            {
-                return RedirectToAction("JoinRoom", new { ChatroomId = chatroomId });
-            }
-            else
-            {
-                string username = User.Identity.Name;
-                await messageService.Create(username, chatroomId, text);
-                return RedirectToAction("JoinRoom", new { ChatroomId = chatroomId });
             }
         }
     }
