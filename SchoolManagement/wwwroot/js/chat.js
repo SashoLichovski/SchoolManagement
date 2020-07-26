@@ -56,3 +56,17 @@ window.addEventListener("resize", function () {
         sideMenu.style.overflow = "hidden";
     }
 })
+
+
+function switchRooms(event) {
+    var elementText = event.target.innerText;
+    if (elementText == "Enter private rooms") {
+        event.target.innerText = "Enter public rooms";
+        document.getElementById("publicRooms").classList.add("hide");
+        document.getElementById("privateRooms").classList.remove("hide");
+    } else {
+        event.target.innerText = "Enter private rooms";
+        document.getElementById("privateRooms").classList.add("hide");
+        document.getElementById("publicRooms").classList.remove("hide");
+    }
+}

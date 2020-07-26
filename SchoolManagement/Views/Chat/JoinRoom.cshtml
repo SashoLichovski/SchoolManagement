@@ -8,6 +8,15 @@
 <div class="hide" id="form">
     <form asp-action="CreateRoom" method="post">
         <i class="far fa-window-close" id="closeForm" onclick="toggleForm()"></i>
+
+        <div class="form-group">
+            <label for="roomType">Choose room type</label>
+            <select class="form-control" name="roomType">
+                <option value="@Enums.ChatType.Public">Public room</option>
+                <option value="@Enums.ChatType.Private">Private room</option>
+            </select>
+        </div>
+
         <div class="form-group">
             <label for="roomName" class="control-label">Room name</label>
             <input name="roomName" class="form-control" id="roomNameInput" onchange="disableButton()"/>
@@ -27,13 +36,37 @@
             <div class="addBtn">
                 <button class="btn" onclick="toggleForm()"><strong>+</strong></button>
             </div>
-            @foreach (var chatRoom in Model.Chatrooms)
-            {
-                <a asp-action="JoinRoom" asp-route-chatroomId="@chatRoom.Id">
-                    <div class="roomLink hvr-grow" id="activeColor">@chatRoom.Name</div>
-                </a>
-            }
-        </div>
+
+            <div class="addBtn" id="switchRoomBtn">
+                <button class="btn" onclick="switchRooms(event)">Enter private rooms</button>
+            </div>
+
+            <div id="publicRooms">
+                @foreach (var chatRoom in Model.Chatrooms)
+                {
+
+                    @if (chatRoom.Type == Enums.ChatType.Public)
+                    {
+                        <a asp-action="JoinRoom" asp-route-chatroomId="@chatRoom.Id">
+                            <div class="roomLink hvr-grow" id="activeColor">@chatRoom.Name</div>
+                        </a>
+                    }
+                }
+            </div>
+
+            <div id="privateRooms" class="hide">
+                @foreach (var chatRoom in Model.Chatrooms)
+	            {
+                    @if (chatRoom.Type == Enums.ChatType.Private && chatRoom.UserId.Contains(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                    {
+                        <a asp-action="JoinRoom" asp-route-chatroomId="@chatRoom.Id">
+                            <div class="roomLink hvr-grow" id="activeColor">@chatRoom.Name</div>
+                        </a>
+                    }
+	            }
+            </div>
+
+            </div>
     </div>
 
     <div class="chatContainer">

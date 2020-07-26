@@ -23,9 +23,17 @@ namespace SchoolManagement.Repositories
             context.SaveChanges();
         }
 
+        public void AddRelation(ChatUser chatUser)
+        {
+            context.ChatUsers.Add(chatUser);
+            context.SaveChanges();
+        }
+
         public List<Chat> GetAll()
         {
             return context.Chats
+                .Include(x => x.Users)
+                .ThenInclude(x => x.User)
                 .Include(x => x.Messages)
                 .ToList();
         }

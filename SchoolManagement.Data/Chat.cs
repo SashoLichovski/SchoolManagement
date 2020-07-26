@@ -12,5 +12,6 @@ namespace SchoolManagement.Data
         public string Name { get; set; }
         public Enums.ChatType ChatType { get; set; }
         public List<Message> Messages { get; set; }
+        public List<ChatUser> Users { get; set; }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+using SchoolManagement.Data;
 using SchoolManagement.Services.Interfaces;
-using SchoolManagement.Services.ViewModels.Chat;
-using System.Threading.Tasks;
+using SchoolManagement.ViewModels;
+using System.Security.Claims;
 
 namespace SchoolManagement.Controllers
 {
@@ -28,20 +28,32 @@ namespace SchoolManagement.Controllers
         public IActionResult CreateRoom() => View();
 
         [HttpPost]
-        public IActionResult CreateRoom(string roomName)
+        public IActionResult CreateRoom(string roomName, string roomType)
         {
             if (string.IsNullOrEmpty(roomName))
             {
                 return RedirectToAction("ActionMessage", "Dashboard", new { Error = "Room name is required" });
             }
-            var resposne = chatService.Create(roomName);
-            if (string.IsNullOrEmpty(resposne.Error))
+            var response = new ActionMessage();
+
+            Enums.ChatType.TryParse(roomType, out Enums.ChatType result);
+            if (result == Enums.ChatType.Private)
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                response = chatService.CreatePrivate(roomName, result, userId);
+            }
+            else
+            {
+                response = chatService.CreatePublic(roomName);
+            }
+
+            if (string.IsNullOrEmpty(response.Error))
             {
                 return RedirectToAction("JoinRoom");
             }
             else
             {
-                return RedirectToAction("ActionMessage", "Dashboard", resposne);
+                return RedirectToAction("ActionMessage", "Dashboard", response);
             }
         }
     }
