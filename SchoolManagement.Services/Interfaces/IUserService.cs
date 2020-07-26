@@ -7,7 +7,7 @@ namespace SchoolManagement.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<ActionMessage> CreateAccount(InputRegisterModel model);
+        Task<ActionMessage> CreateAccount(InputRegisterModel model, byte[] image);
         ManageUsersModel GetAll();
         Task DeleteAccount(string userId);
         Task<AccountDetailsModel> GetById(string userId);

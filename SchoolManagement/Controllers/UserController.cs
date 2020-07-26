@@ -3,10 +3,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SchoolManagement.Data;
+using SchoolManagement.Helpers;
 using SchoolManagement.Services.Interfaces;
-using SchoolManagement.Services.ViewModels;
 using SchoolManagement.ViewModels;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -32,11 +31,12 @@ namespace SchoolManagement.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> Register(InputRegisterModel model)
+        public async Task<IActionResult> Register(InputRegisterModel model, string userImage)
         {
             if (ModelState.IsValid)
             {
-                ActionMessage response = await userService.CreateAccount(model);
+                byte[] image = ImageToByteConverter.Convert(userImage);
+                ActionMessage response = await userService.CreateAccount(model, image);
                 if (User.Identity.IsAuthenticated)
                 {
                     return RedirectToAction("ActionMessage", "Dashboard", response);

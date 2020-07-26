@@ -1,7 +1,5 @@
 ﻿using SchoolManagement.Data;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SchoolManagement.Services.ViewModels.Chat
 {

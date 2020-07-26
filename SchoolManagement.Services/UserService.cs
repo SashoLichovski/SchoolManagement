@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Identity;
 using SchoolManagement.Common;
 using SchoolManagement.Data;
+using SchoolManagement.Services.Common;
 using SchoolManagement.Services.Interfaces;
 using SchoolManagement.ViewModels;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,7 +22,7 @@ namespace SchoolManagement.Services
             this.roleManager = roleManager;
         }
 
-        public async Task<ActionMessage> CreateAccount(InputRegisterModel model)
+        public async Task<ActionMessage> CreateAccount(InputRegisterModel model, byte[] image)
         {
             ActionMessage response = new ActionMessage();
 
@@ -33,6 +33,7 @@ namespace SchoolManagement.Services
                 User user = new User();
                 user.Email = model.Email;
                 user.UserName = model.Username;
+                user.UserImage = image;
 
                 IdentityResult result = await userManager.CreateAsync(user, model.Password);
 
@@ -78,10 +79,18 @@ namespace SchoolManagement.Services
         public async Task<ActionMessage> UpdateAsync(AccountDetailsModel model, List<IFormFile> userImage)
         {
             ActionMessage response = new ActionMessage();
-            User user = await userManager.FindByIdAsync(model.UserId);
-            //Validate if username exists
 
-            byte[] image = await ConvertImageToByteArrayAsync(userImage);
+            User user = await userManager.FindByIdAsync(model.UserId);
+
+            bool exists = userManager.Users.Where(x => x.Id != model.UserId && x.UserName == model.UserName).Any();
+
+            if (exists)
+            {
+                response.Error = $"Update Failed!!! Username {model.UserName} aleready exists ";
+                return response;
+            }
+
+            byte[] image = await ByteArrayConverter.ConvertImageToByteArrayAsync(userImage);
 
             if(user != null)
             {
@@ -100,16 +109,6 @@ namespace SchoolManagement.Services
                 response.Error = "Update Failed";
             }
             return response; 
-        }
-
-        private async Task<byte[]> ConvertImageToByteArrayAsync(List<IFormFile> userImage)
-        {
-            MemoryStream stream= new MemoryStream();
-            foreach(var item in userImage)
-            {
-                await item.CopyToAsync(stream);
-            }
-            return stream.ToArray();
         }
     }
 }

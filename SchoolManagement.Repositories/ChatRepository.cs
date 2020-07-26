@@ -1,10 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Data;
 using SchoolManagement.Repositories.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SchoolManagement.Repositories
 {
@@ -33,7 +31,7 @@ namespace SchoolManagement.Repositories
         {
             return context.Chats
                 .Include(x => x.Users)
-                .ThenInclude(x => x.User)
+                    .ThenInclude(x => x.User)
                 .Include(x => x.Messages)
                 .ToList();
         }

@@ -5,10 +5,8 @@ using SchoolManagement.Repositories.Interfaces;
 using SchoolManagement.Services.Interfaces;
 using SchoolManagement.Services.ViewModels.Chat;
 using SchoolManagement.ViewModels;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SchoolManagement.Services
 {

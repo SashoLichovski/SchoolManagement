@@ -73,11 +73,11 @@
         <div class="messageContainer" id="chat">
                 @foreach (var message in Model.Chatrooms.FirstOrDefault(x => x.Id == Model.ChatroomId).Messages)
                 {
-            <div class="message">
-                <header>@message.CreatedBy:</header>
-                <p>@message.Text</p>
-                <footer>@message.DatePosted.ToString("MMMM-dd, hh:mm tt")</footer>
-            </div>
+                    <div class="message">
+                        <header>@message.CreatedBy:</header>
+                        <p>@message.Text</p>
+                        <footer>@message.DatePosted.ToString("MMMM-dd, hh:mm tt")</footer>
+                    </div>
                 }
         </div>
 
@@ -94,9 +94,7 @@
 </div>
 
 @section Scripts{
-    <script src="~/lib/MomentJs/moment.js"></script>
     <script src="~/lib/Axios/axios.js"></script>
-    <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/SignalR/signalr.js"></script>
     <script src="~/js/chat.js"></script>
     <script src="https://kit.fontawesome.com/15dcd5d68f.js" crossorigin="anonymous"></script>

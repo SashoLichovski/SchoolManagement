@@ -11,12 +11,10 @@ namespace SchoolManagement.Controllers
     public class ChatController : Controller
     {
         private readonly IChatService chatService;
-        private readonly IMessageService messageService;
 
-        public ChatController(IChatService chatService, IMessageService messageService)
+        public ChatController(IChatService chatService)
         {
             this.chatService = chatService;
-            this.messageService = messageService;
         }
 
         public IActionResult JoinRoom(int chatroomId)

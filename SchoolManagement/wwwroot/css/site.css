@@ -18,20 +18,31 @@
     margin-left: 130px;
 }
 
-.footer {
+/*.footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    white-space: nowrap;
+    white-space: nowrap;*/
     /* Set the fixed height of the footer here */
-    height: 60px;
+    /*height: 60px;
 }
     .footer div{
         margin-top: 20px;
-    }
+    }*/
+.nav-item img {
+    border-radius: 100%;
+    margin-left: 15%;
+}
 
 @media only screen and (max-width : 991px) {
     .navbar .navbar-brand {
         margin-left: 20px;
+    }
+}
+@media only screen and (max-width : 768px){
+    .nav-item img {
+        border-radius: 100%;
+        margin-left: 0;
+        margin-top: 2%;
     }
 }

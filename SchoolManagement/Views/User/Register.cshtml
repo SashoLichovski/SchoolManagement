@@ -3,12 +3,12 @@
 @{
     ViewData["Title"] = "Register";
 }
-
+@inject IConfiguration configuration
 <h3>Register</h3>
 <hr />
 <div class="row">
     <div class="col-md-6">
-        <form asp-action="Register" method="post">
+        <form asp-action="Register" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
@@ -29,6 +29,9 @@
                 <label asp-for="ConfirmPassword" class="control-label"></label>
                 <input asp-for="ConfirmPassword" class="form-control" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input  name="userImage" type="hidden" value="@configuration["DefaultUserImagePath"]" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Register" class="btn btn-primary" />

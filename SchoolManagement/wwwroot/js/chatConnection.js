@@ -29,10 +29,9 @@ var joinRoom = function () {
     var chatroomName = document.getElementById("chatroomName").value;
     axios.post(`/ChatConnection/JoinRoom/${_connectionId}/${chatroomName}`)
         .then(res => {
-            console.log("It works");
         })
         .catch(err => {
-            console.log("Failed !", err);
+            console.log(err);
         })
 }
 
@@ -54,11 +53,10 @@ var sendMessage = function (event) {
 
     axios.post("/ChatConnection/SendMessage", data)
         .then(res => {
-            console.log("Message sent");
             updateScroll();
             document.getElementById("inputText").value = "";
         })
         .catch(err => {
-            console.log("Failed");
+            console.log(err);
         })
 }
