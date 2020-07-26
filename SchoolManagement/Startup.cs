@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SchoolManagement.Data;
+using SchoolManagement.Hubs;
 using SchoolManagement.Repositories;
 using SchoolManagement.Repositories.Interfaces;
 using SchoolManagement.Services;
@@ -90,7 +91,7 @@ namespace SchoolManagement
 
             app.UseSignalR(routes =>
             {
-
+                routes.MapHub<ChatHub>("/chatHub");
             });
 
             app.UseMvc(routes =>

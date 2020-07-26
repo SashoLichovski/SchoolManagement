@@ -42,12 +42,16 @@ namespace SchoolManagement.Controllers
             return Ok();
         }
 
-        public async Task<IActionResult> SendMessage(string text, int chatroomId)
+        [HttpPost("[action]")]
+        public async Task<IActionResult> SendMessage(string text, int chatroomId, string chatroomName)
         {
-            var chatName = chatService.GetById(chatroomId).Name;
             var username = User.Identity.Name;
             var msg = await messageService.Create(username, chatroomId, text);
-            await chat.Clients.Group(chatName).SendAsync("ReceiveMessage", msg);
+            await chat.Clients.Group(chatroomName).SendAsync("ReceiveMessage", new { 
+                Text = msg.Text,
+                CreatedBy = msg.CreatedBy,
+                DatePosted = msg.DatePosted.ToString("MMMM-dd, hh:mm tt")
+            });
             return Ok();
         }
     }

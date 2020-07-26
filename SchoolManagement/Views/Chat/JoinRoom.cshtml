@@ -40,19 +40,20 @@
         <div class="messageContainer" id="chat">
                 @foreach (var message in Model.Chatrooms.FirstOrDefault(x => x.Id == Model.ChatroomId).Messages)
                 {
-                    <div class="message">
-                        <header><b>@message.CreatedBy:</b></header>
-                        <p>@message.Text</p>
-                        <footer><b>@message.DatePosted.ToString("MMMM-dd, hh:mm tt")</b></footer>
-                    </div>
+            <div class="message">
+                <header>@message.CreatedBy:</header>
+                <p>@message.Text</p>
+                <footer>@message.DatePosted.ToString("MMMM-dd, hh:mm tt")</footer>
+            </div>
                 }
         </div>
 
 
         <div class="inputContainer">
-            <form asp-action="CreateMessage" method="post">
-                <input hidden name="chatroomId" value="@Model.ChatroomId" />
-                <input name="text" placeholder="Write something to @Model.Chatrooms.FirstOrDefault(x => x.Id == Model.ChatroomId).Name room..." />
+            <form asp-action="CreateMessage" method="post" onsubmit="sendMessage(event)">
+                <input hidden name="chatroomId" value="@Model.ChatroomId" id="chatroomId" />
+                <input hidden name="chatroomName" value="@Model.Chatrooms.FirstOrDefault(x => x.Id == Model.ChatroomId).Name" id="chatroomName" />
+                <input name="text" placeholder="Write something to @Model.Chatrooms.FirstOrDefault(x => x.Id == Model.ChatroomId).Name room..." id="inputText"/>
                 <button type="submit" class="btn btn-success">Send</button>
             </form>
         </div>
@@ -60,8 +61,11 @@
 </div>
 
 @section Scripts{
+    <script src="~/lib/MomentJs/moment.js"></script>
     <script src="~/lib/Axios/axios.js"></script>
-    <script src="~/lib/SignalR/jquery.signalR.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/SignalR/signalr.js"></script>
     <script src="~/js/chat.js"></script>
     <script src="https://kit.fontawesome.com/15dcd5d68f.js" crossorigin="anonymous"></script>
+    <script src="~/js/chatConnection.js"></script>
 }

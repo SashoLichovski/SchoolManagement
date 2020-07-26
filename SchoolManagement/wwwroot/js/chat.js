@@ -55,9 +55,4 @@ window.addEventListener("resize", function () {
         sideMenu.style.height = "0px";
         sideMenu.style.overflow = "hidden";
     }
-
-    //var body = document.getElementById("body");
-    //var chat = document.getElementById("chat");
-    //chat.style.height = body.style.height;
-    //sideMenu.style.height = body.style.height;
 })
