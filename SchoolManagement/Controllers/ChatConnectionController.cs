@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using SchoolManagement.Hubs;
-using SchoolManagement.Migrations;
 using SchoolManagement.Services.Interfaces;
+using System.Threading.Tasks;
 
 namespace SchoolManagement.Controllers
 {
