@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using SchoolManagement.Data;
+﻿using SchoolManagement.Data;
 using SchoolManagement.Repositories.Interfaces;
 using SchoolManagement.Services.Interfaces;
 using SchoolManagement.ViewModels;
@@ -14,14 +13,12 @@ namespace SchoolManagement.Services
         private readonly IExamRepositoty examRepositoty;
         private readonly ISubjectService subjectService;
         private readonly IClassroomService classroomService;
-        private readonly UserManager<IdentityUser> userManager;
 
-        public ExamService(IExamRepositoty examRepositoty, ISubjectService subjectService, IClassroomService classroomService, UserManager<IdentityUser> userManager)
+        public ExamService(IExamRepositoty examRepositoty, ISubjectService subjectService, IClassroomService classroomService)
         {
             this.examRepositoty = examRepositoty;
             this.subjectService = subjectService;
             this.classroomService = classroomService;
-            this.userManager = userManager;
         }
 
         public ActionMessage Create(int classroomId, string subjectTitle, DateTime examStart, DateTime examEnd, string userId)

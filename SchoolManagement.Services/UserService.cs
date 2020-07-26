@@ -79,6 +79,7 @@ namespace SchoolManagement.Services
         {
             ActionMessage response = new ActionMessage();
             User user = await userManager.FindByIdAsync(model.UserId);
+            //Validate if username exists
 
             byte[] image = await ConvertImageToByteArrayAsync(userImage);
 
