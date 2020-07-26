@@ -61,7 +61,8 @@ namespace SchoolManagement.Common
                 Id = chat.Id,
                 Messages = chat.Messages?.Select(x => x.ToMessageViewModel()).ToList(),
                 Name = chat.Name,
-                Type = chat.ChatType
+                Type = chat.ChatType,
+                UserId = chat.Users.Select(x => x.UserId).ToList()
             };
         }
 

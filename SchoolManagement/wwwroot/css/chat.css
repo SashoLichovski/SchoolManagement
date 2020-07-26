@@ -7,6 +7,8 @@ a:hover {
     text-decoration: none;
 }
 
+
+
 .addBtn {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     padding: 10px;
@@ -16,6 +18,11 @@ a:hover {
         font-size: 2em;
         background-color: #ff9c07;
     }
+
+#switchRoomBtn button{
+    font-size: 1em;
+    font-weight: bold;
+}
 
 .chatRoomContainer {
     width: 100%;
@@ -81,6 +88,19 @@ a:hover {
         -webkit-box-shadow: inset 0 0 6px rgb(0, 0, 0);
     }
 
+.messageBox {
+    display: flex;
+}
+
+.imgContainer {
+    margin-right: 10px;
+    border-radius: 50%;
+}
+    .imgContainer img {
+        padding: 10px;
+        background-color: red;
+    }
+
 .message {
     display: flex;
     padding: 10px;
@@ -90,10 +110,14 @@ a:hover {
 }
     .message header {
         width: 11%;
+        font-weight: bold;
     }
     .message p {
         width: 70%;
         margin-right: 10px;
+    }
+    .message footer{
+        font-weight: bold;
     }
 
 .inputContainer {
@@ -187,6 +211,7 @@ a:hover {
         display: block;
     }
     .message p {
+        width: 90%;
         padding: 10px;
     }
 }

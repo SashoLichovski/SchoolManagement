@@ -22,6 +22,7 @@ namespace SchoolManagement.Services
 
         public async Task<MessageViewModel> Create(string username, int chatroomId, string text)
         {
+
             var message = new Message()
             {
                 Text = text,

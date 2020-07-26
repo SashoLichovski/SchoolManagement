@@ -1,4 +1,5 @@
-﻿using SchoolManagement.Common;
+﻿using Microsoft.Extensions.Configuration;
+using SchoolManagement.Common;
 using SchoolManagement.Data;
 using SchoolManagement.Repositories.Interfaces;
 using SchoolManagement.Services.Interfaces;
@@ -14,14 +15,40 @@ namespace SchoolManagement.Services
     public class ChatService : IChatService
     {
         private readonly IChatRepository chatRepository;
+        private readonly IConfiguration configuration;
 
-        public ChatService(IChatRepository chatRepository)
+        public ChatService(IChatRepository chatRepository, IConfiguration configuration)
         {
             this.chatRepository = chatRepository;
+            this.configuration = configuration;
         }
 
-        public ActionMessage Create(string roomName)
+        public ActionMessage CreatePrivate(string roomName, Enums.ChatType result, string userId)
         {
+            var response = new ActionMessage();
+
+            var chat = new Chat()
+            {
+                ChatType = result,
+                Name = roomName,
+            };
+            chatRepository.Add(chat);
+
+
+            var chatUser = new ChatUser()
+            {
+                UserId = userId,
+                ChatId = chatRepository.GetByName(roomName).Id
+            };
+
+            chatRepository.AddRelation(chatUser);
+
+            return response;
+        }
+
+        public ActionMessage CreatePublic(string roomName)
+        {
+
             var response = new ActionMessage();
 
             var dbChat = chatRepository.GetByName(roomName);
@@ -33,7 +60,7 @@ namespace SchoolManagement.Services
 
             var chat = new Chat()
             {
-                Name = roomName
+                Name = roomName,
             };
 
             chatRepository.Add(chat);
@@ -56,6 +83,24 @@ namespace SchoolManagement.Services
         public ChatroomViewModel GetByName(string defaultRoomName)
         {
             return chatRepository.GetByName(defaultRoomName).ToChatroomViewModel();
+        }
+
+        public JoinRoomViewModel GetRoomModel(int chatroomId)
+        {
+            var modelList = GetAll();
+            var model = new JoinRoomViewModel()
+            {
+                Chatrooms = modelList
+            };
+            if (chatroomId != 0)
+            {
+                model.ChatroomId = chatroomId;
+            }
+            else
+            {
+                model.ChatroomId = GetByName(configuration["DefaultChatroom"]).Id;
+            }
+            return model;
         }
     }
 }

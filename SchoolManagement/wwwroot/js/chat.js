@@ -55,9 +55,18 @@ window.addEventListener("resize", function () {
         sideMenu.style.height = "0px";
         sideMenu.style.overflow = "hidden";
     }
-
-    //var body = document.getElementById("body");
-    //var chat = document.getElementById("chat");
-    //chat.style.height = body.style.height;
-    //sideMenu.style.height = body.style.height;
 })
+
+
+function switchRooms(event) {
+    var elementText = event.target.innerText;
+    if (elementText == "Enter private rooms") {
+        event.target.innerText = "Enter public rooms";
+        document.getElementById("publicRooms").classList.add("hide");
+        document.getElementById("privateRooms").classList.remove("hide");
+    } else {
+        event.target.innerText = "Enter private rooms";
+        document.getElementById("privateRooms").classList.add("hide");
+        document.getElementById("publicRooms").classList.remove("hide");
+    }
+}
