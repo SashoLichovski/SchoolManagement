@@ -8,5 +8,6 @@ namespace SchoolManagement.Services.ViewModels.Chat
         public string CreatedBy { get; set; }
         public int ChatId { get; set; }
         public DateTime DatePosted { get; set; }
+        public byte[] UserImage { get; set; }
     }
 }
