@@ -62,6 +62,7 @@
                         <a asp-action="JoinRoom" asp-route-chatroomId="@chatRoom.Id">
                             <div class="roomLink hvr-grow" id="activeColor">@chatRoom.Name</div>
                         </a>
+                        <a class="btn btn-primary btn-sm" asp-action="AddPeople" asp-route-chatroomId="@chatRoom.Id">Add people</a>
                     }
 	            }
             </div>

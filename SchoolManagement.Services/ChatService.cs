@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using SchoolManagement.Common;
 using SchoolManagement.Data;
 using SchoolManagement.Repositories.Interfaces;
@@ -7,6 +8,7 @@ using SchoolManagement.Services.ViewModels.Chat;
 using SchoolManagement.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SchoolManagement.Services
 {
@@ -14,11 +16,20 @@ namespace SchoolManagement.Services
     {
         private readonly IChatRepository chatRepository;
         private readonly IConfiguration configuration;
+        private readonly UserManager<User> userManager;
 
-        public ChatService(IChatRepository chatRepository, IConfiguration configuration)
+        public ChatService(IChatRepository chatRepository, IConfiguration configuration, UserManager<User> userManager)
         {
             this.chatRepository = chatRepository;
             this.configuration = configuration;
+            this.userManager = userManager;
+        }
+
+        public async Task AddPerson(int chatroomId, string username)
+        {
+            User user = await userManager.FindByNameAsync(username);
+            var userId = user.Id;
+            CreateChatUser(userId, chatroomId);
         }
 
         public ActionMessage CreatePrivate(string roomName, Enums.ChatType result, string userId)
@@ -32,16 +43,22 @@ namespace SchoolManagement.Services
             };
             chatRepository.Add(chat);
 
+            var chatroomId = chatRepository.GetByName(roomName).Id;
 
+            CreateChatUser(userId, chatroomId);
+
+            return response;
+        }
+
+        private void CreateChatUser(string userId, int chatroomId)
+        {
             var chatUser = new ChatUser()
             {
                 UserId = userId,
-                ChatId = chatRepository.GetByName(roomName).Id
+                ChatId = chatroomId
             };
 
             chatRepository.AddRelation(chatUser);
-
-            return response;
         }
 
         public ActionMessage CreatePublic(string roomName)
@@ -99,6 +116,11 @@ namespace SchoolManagement.Services
                 model.ChatroomId = GetByName(configuration["DefaultChatroom"]).Id;
             }
             return model;
+        }
+
+        public List<ChatUser> GetChatUsers(int chatroomId)
+        {
+            return chatRepository.GetChatUsers(chatroomId);
         }
     }
 }

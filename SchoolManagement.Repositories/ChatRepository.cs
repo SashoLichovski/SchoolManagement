@@ -47,5 +47,10 @@ namespace SchoolManagement.Repositories
         {
             return context.Chats.FirstOrDefault(x => x.Name.Equals(roomName));
         }
+
+        public List<ChatUser> GetChatUsers(int chatroomId)
+        {
+            return context.ChatUsers.Where(x => x.ChatId.Equals(chatroomId)).ToList();
+        }
     }
 }

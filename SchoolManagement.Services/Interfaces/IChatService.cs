@@ -1,9 +1,8 @@
 ﻿using SchoolManagement.Data;
 using SchoolManagement.Services.ViewModels.Chat;
 using SchoolManagement.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace SchoolManagement.Services.Interfaces
 {
@@ -15,5 +14,7 @@ namespace SchoolManagement.Services.Interfaces
         ChatroomViewModel GetById(int chatroomId);
         ChatroomViewModel GetByName(string defaultRoomName);
         JoinRoomViewModel GetRoomModel(int chatroomId);
+        Task AddPerson(int chatroomId, string username);
+        List<ChatUser> GetChatUsers(int chatroomId);
     }
 }

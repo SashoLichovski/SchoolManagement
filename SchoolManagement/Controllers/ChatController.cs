@@ -1,9 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SchoolManagement.Data;
 using SchoolManagement.Services.Interfaces;
+using SchoolManagement.Services.ViewModels.Chat;
 using SchoolManagement.ViewModels;
+using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace SchoolManagement.Controllers
 {
@@ -11,10 +15,12 @@ namespace SchoolManagement.Controllers
     public class ChatController : Controller
     {
         private readonly IChatService chatService;
+        private readonly IUserService userService;
 
-        public ChatController(IChatService chatService)
+        public ChatController(IChatService chatService, IUserService userService)
         {
             this.chatService = chatService;
+            this.userService = userService;
         }
 
         public IActionResult JoinRoom(int chatroomId)
@@ -53,6 +59,22 @@ namespace SchoolManagement.Controllers
             {
                 return RedirectToAction("ActionMessage", "Dashboard", response);
             }
+        }
+
+        public IActionResult AddPeople(int chatroomId)
+        {
+            var model = new AddPeopleViewModel()
+            {
+                Usernames = userService.GetUsernames(chatroomId),
+                ChatroomId = chatroomId
+            };
+            return View(model);
+        }
+        
+        public async Task<IActionResult> AddPerson(int chatroomId, string username)
+        {
+            await chatService.AddPerson(chatroomId, username);
+            return RedirectToAction("AddPeople", new { ChatroomId = chatroomId });
         }
     }
 }

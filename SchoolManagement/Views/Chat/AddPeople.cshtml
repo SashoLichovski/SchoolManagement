@@ -1,0 +1,32 @@
+﻿@model SchoolManagement.Services.ViewModels.Chat.AddPeopleViewModel
+
+<h3>Add people to your group</h3>
+<hr />
+@if (Model.Usernames.Count == 0)
+{
+    <h3>All users are in your group</h3>
+}
+else
+{
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var username in Model.Usernames)
+            {
+                <tr>
+                    <td>@username</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" asp-action="AddPerson" asp-route-chatroomId="@Model.ChatroomId" asp-route-username="@username">Add to room</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

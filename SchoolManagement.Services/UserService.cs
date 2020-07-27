@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Common;
 using SchoolManagement.Data;
 using SchoolManagement.Services.Common;
@@ -7,6 +8,7 @@ using SchoolManagement.Services.Interfaces;
 using SchoolManagement.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace SchoolManagement.Services
@@ -15,11 +17,13 @@ namespace SchoolManagement.Services
     {
         private readonly UserManager<User> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly IChatService chatService;
 
-        public UserService(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public UserService(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IChatService chatService)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
+            this.chatService = chatService;
         }
 
         public async Task<ActionMessage> CreateAccount(InputRegisterModel model, byte[] image)
@@ -74,6 +78,21 @@ namespace SchoolManagement.Services
         {
             User user = await userManager.FindByIdAsync(userId);
             return user.ToDetailsModel();
+        }
+
+        public List<string> GetUsernames(int chatroomId)
+        {
+            var users = userManager.Users.ToList();
+
+            var chatUserIds = chatService.GetChatUsers(chatroomId)
+                .Select(x => x.UserId)
+                .ToList();
+
+            var usernames = users.Where(x => !chatUserIds.Contains(x.Id))
+                .Select(x => x.UserName)
+                .ToList();
+
+            return usernames;
         }
 
         public async Task<ActionMessage> UpdateAsync(AccountDetailsModel model, List<IFormFile> userImage)

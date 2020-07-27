@@ -12,5 +12,6 @@ namespace SchoolManagement.Services.Interfaces
         Task DeleteAccount(string userId);
         Task<AccountDetailsModel> GetById(string userId);
         Task<ActionMessage> UpdateAsync(AccountDetailsModel model, List<IFormFile> userImage);
+        List<string> GetUsernames(int chatroomId);
     }
 }
