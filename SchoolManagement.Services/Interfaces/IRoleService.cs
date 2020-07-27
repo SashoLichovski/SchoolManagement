@@ -1,4 +1,4 @@
-﻿using SchoolManagement.ViewModels;
+﻿using SchoolManagement.Services.ViewModels;
 using System.Threading.Tasks;
 
 namespace SchoolManagement.Services.Interfaces

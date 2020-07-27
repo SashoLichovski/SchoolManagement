@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SchoolManagement.ViewModels
+namespace SchoolManagement.Services.ViewModels.User
 {
     public class InputRegisterModel
     {

@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SchoolManagement.Data;
 using SchoolManagement.Services.Interfaces;
+using SchoolManagement.Services.ViewModels;
 using SchoolManagement.Services.ViewModels.Chat;
-using SchoolManagement.ViewModels;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 

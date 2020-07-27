@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using SchoolManagement.Services.ViewModels.Exam;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace SchoolManagement.ViewModels
+namespace SchoolManagement.Services.ViewModels.Clasroom
 {
     public class ClassroomViewModel
     {

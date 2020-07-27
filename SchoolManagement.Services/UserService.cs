@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Common;
 using SchoolManagement.Data;
 using SchoolManagement.Services.Common;
 using SchoolManagement.Services.Interfaces;
-using SchoolManagement.ViewModels;
+using SchoolManagement.Services.ViewModels;
+using SchoolManagement.Services.ViewModels.User;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace SchoolManagement.Services

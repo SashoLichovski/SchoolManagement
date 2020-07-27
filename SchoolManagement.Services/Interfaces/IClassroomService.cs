@@ -1,4 +1,5 @@
-﻿using SchoolManagement.ViewModels;
+﻿using SchoolManagement.Services.ViewModels;
+using SchoolManagement.Services.ViewModels.Clasroom;
 using System.Collections.Generic;
 
 namespace SchoolManagement.Services.Interfaces

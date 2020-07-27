@@ -5,33 +5,15 @@
     <link rel="stylesheet" href="~/lib/Hover-master/css/hover.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 }
-<div class="hide" id="form">
-    <form asp-action="CreateRoom" method="post">
-        <i class="far fa-window-close" id="closeForm" onclick="toggleForm()"></i>
-
-        <div class="form-group">
-            <label for="roomType">Choose room type</label>
-            <select class="form-control" name="roomType">
-                <option value="@Enums.ChatType.Public">Public room</option>
-                <option value="@Enums.ChatType.Private">Private room</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="roomName" class="control-label">Room name</label>
-            <input name="roomName" class="form-control" id="roomNameInput" onchange="disableButton()"/>
-        </div>
-        <input class="btn btn-primary" type="submit" value="Create" id="formBtn"/>
-    </form>
-</div>
+<partial name="./Partials/_CreateRoomForm" />
 
 <div class="chatRoomContainer" >
 
-        <div class="bars" onclick="toggleSideMenu()">
-            <i class="fas fa-bars"></i>
-        </div>
-    <div class="sideMenuContainer" id="sideMenu">
+    <div class="bars" onclick="toggleSideMenu()">
+        <i class="fas fa-bars"></i>
+    </div>
 
+    <div class="sideMenuContainer" id="sideMenu">
         <div class="roomName">
             <div class="addBtn">
                 <button class="btn" onclick="toggleForm()"><strong>+</strong></button>
@@ -41,45 +23,20 @@
                 <button class="btn" onclick="switchRooms(event)">Enter private rooms</button>
             </div>
 
-            <div id="publicRooms">
-                @foreach (var chatRoom in Model.Chatrooms)
-                {
-
-                    @if (chatRoom.Type == Enums.ChatType.Public)
-                    {
-                        <a asp-action="JoinRoom" asp-route-chatroomId="@chatRoom.Id">
-                            <div class="roomLink hvr-grow" id="activeColor">@chatRoom.Name</div>
-                        </a>
-                    }
-                }
-            </div>
-
-            <div id="privateRooms" class="hide">
-                @foreach (var chatRoom in Model.Chatrooms)
-	            {
-                    @if (chatRoom.Type == Enums.ChatType.Private && chatRoom.UserId.Contains(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                    {
-                        <a asp-action="JoinRoom" asp-route-chatroomId="@chatRoom.Id">
-                            <div class="roomLink hvr-grow" id="activeColor">@chatRoom.Name</div>
-                        </a>
-                        <a class="btn btn-primary btn-sm" asp-action="AddPeople" asp-route-chatroomId="@chatRoom.Id">Add people</a>
-                    }
-	            }
-            </div>
-
-            </div>
+            <partial name="./Partials/_ChatRooms" for="@Model"/>
+        </div>
     </div>
 
     <div class="chatContainer">
         <div class="messageContainer" id="chat">
-                @foreach (var message in Model.Chatrooms.FirstOrDefault(x => x.Id == Model.ChatroomId).Messages)
-                {
-                    <div class="message">
-                        <header>@message.CreatedBy:</header>
-                        <p>@message.Text</p>
-                        <footer>@message.DatePosted.ToString("MMMM-dd, hh:mm tt")</footer>
-                    </div>
-                }
+            @foreach (var message in Model.Chatrooms.FirstOrDefault(x => x.Id == Model.ChatroomId).Messages)
+            {
+                <div class="message">
+                    <header>@message.CreatedBy:</header>
+                    <p>@message.Text</p>
+                    <footer>@message.DatePosted.ToString("MMMM-dd, hh:mm tt")</footer>
+                </div>
+            }
         </div>
 
 
@@ -92,6 +49,7 @@
             </form>
         </div>
     </div>
+
 </div>
 
 @section Scripts{

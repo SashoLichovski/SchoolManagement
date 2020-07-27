@@ -1,7 +1,8 @@
 ﻿using SchoolManagement.Data;
 using SchoolManagement.Repositories.Interfaces;
 using SchoolManagement.Services.Interfaces;
-using SchoolManagement.ViewModels;
+using SchoolManagement.Services.ViewModels;
+using SchoolManagement.Services.ViewModels.Clasroom;
 using System;
 using System.Collections.Generic;
 using System.Linq;

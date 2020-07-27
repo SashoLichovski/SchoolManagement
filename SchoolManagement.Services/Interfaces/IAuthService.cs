@@ -1,4 +1,5 @@
-﻿using SchoolManagement.ViewModels;
+﻿using SchoolManagement.Services.ViewModels;
+using SchoolManagement.Services.ViewModels.Auth;
 using System.Threading.Tasks;
 
 namespace SchoolManagement.Services.Interfaces

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace SchoolManagement.ViewModels
+namespace SchoolManagement.Services.ViewModels.Subject
 {
     public class SubjectViewModel
     {

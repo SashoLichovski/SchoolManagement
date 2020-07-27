@@ -1,6 +1,9 @@
 ﻿using SchoolManagement.Data;
 using SchoolManagement.Services.ViewModels.Chat;
-using SchoolManagement.ViewModels;
+using SchoolManagement.Services.ViewModels.Clasroom;
+using SchoolManagement.Services.ViewModels.Exam;
+using SchoolManagement.Services.ViewModels.Subject;
+using SchoolManagement.Services.ViewModels.User;
 using System.Linq;
 
 namespace SchoolManagement.Common

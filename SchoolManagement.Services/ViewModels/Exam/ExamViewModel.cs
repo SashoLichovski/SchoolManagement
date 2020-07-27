@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace SchoolManagement.ViewModels
+namespace SchoolManagement.Services.ViewModels.Exam
 {
     public class ExamViewModel
     {

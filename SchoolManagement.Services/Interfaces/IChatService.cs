@@ -1,6 +1,6 @@
 ﻿using SchoolManagement.Data;
+using SchoolManagement.Services.ViewModels;
 using SchoolManagement.Services.ViewModels.Chat;
-using SchoolManagement.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

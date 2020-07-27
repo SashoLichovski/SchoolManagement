@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
-using SchoolManagement.ViewModels;
+using SchoolManagement.Services.ViewModels;
+using SchoolManagement.Services.ViewModels.User;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
