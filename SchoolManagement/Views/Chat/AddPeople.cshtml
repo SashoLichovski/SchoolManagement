@@ -1,7 +1,17 @@
 ﻿@model SchoolManagement.Services.ViewModels.Chat.AddPeopleViewModel
 
+<style>
+    .hide{
+        display: none;
+    }
+</style>
+
 <h3>Add people to your group</h3>
 <hr />
+<div class="col-md-6">
+    <input class="form-control" type="text" id="searchInput" onkeyup="searchUsers()" placeholder="Search usernames"/>
+</div>
+<br />
 @if (Model.Usernames.Count == 0)
 {
     <h3>All users are in your group</h3>
@@ -19,7 +29,7 @@ else
 
             @foreach (var username in Model.Usernames)
             {
-                <tr>
+                <tr class="userRow">
                     <td>@username</td>
                     <td>
                         <a class="btn btn-primary btn-sm" asp-action="AddPerson" asp-route-chatroomId="@Model.ChatroomId" asp-route-username="@username">Add to room</a>
@@ -28,5 +38,9 @@ else
             }
         </tbody>
     </table>
+}
+
+@section Scripts{ 
+    <script src="~/js/search.js"></script>
 }
 
