@@ -10,6 +10,11 @@ connection.on("ReceiveMessage", function (data) {
     message.classList.add("message");
     chat.appendChild(message);
 
+    var img = document.createElement("img");
+    img.src = `data:image/jpeg;base64,${data.userImage}`;
+    img.classList.add("message-img");
+    message.appendChild(img);
+
     var header = document.createElement("header");
     header.innerHTML = data.createdBy + ":";
     message.appendChild(header);

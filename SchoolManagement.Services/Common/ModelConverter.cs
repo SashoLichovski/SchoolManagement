@@ -77,6 +77,7 @@ namespace SchoolManagement.Common
                 CreatedBy = message.CreatedBy,
                 ChatId = message.ChatId,
                 DatePosted = message.DatePosted,
+                UserImage = message.UserImage,
             };
         }
     }

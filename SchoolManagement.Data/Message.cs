@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace SchoolManagement.Data
 {
@@ -12,6 +10,7 @@ namespace SchoolManagement.Data
         public string Text { get; set; }
         [Required]
         public string CreatedBy { get; set; }
+        public byte[] UserImage { get; set; }
         [Required]
         public int ChatId { get; set; }
         public Chat Chat { get; set; }

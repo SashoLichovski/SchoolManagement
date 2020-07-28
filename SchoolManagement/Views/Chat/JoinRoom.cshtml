@@ -32,6 +32,7 @@
             @foreach (var message in Model.Chatrooms.FirstOrDefault(x => x.Id == Model.ChatroomId).Messages)
             {
                 <div class="message">
+                <img src="data:image/jpeg;base64,@Convert.ToBase64String(message.UserImage)" class="message-img" />
                     <header>@message.CreatedBy:</header>
                     <p>@message.Text</p>
                     <footer>@message.DatePosted.ToString("MMMM-dd, hh:mm tt")</footer>
