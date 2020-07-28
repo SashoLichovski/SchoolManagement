@@ -1,16 +1,18 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using SchoolManagement.Data;
 using SchoolManagement.Services.Interfaces;
-using SchoolManagement.ViewModels;
+using SchoolManagement.Services.ViewModels;
+using SchoolManagement.Services.ViewModels.Auth;
 using System.Threading.Tasks;
 
 namespace SchoolManagement.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly SignInManager<IdentityUser> signInManager;
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly SignInManager<User> signInManager;
+        private readonly UserManager<User> userManager;
 
-        public AuthService(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
+        public AuthService(SignInManager<User> signInManager, UserManager<User> userManager)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
@@ -19,7 +21,7 @@ namespace SchoolManagement.Services
         public async Task<ActionMessage> SignInAsync(InputLoginModel model)
         {
             ActionMessage response = new ActionMessage();
-            IdentityUser user = await userManager.FindByEmailAsync(model.Email);
+            User user = await userManager.FindByEmailAsync(model.Email);
 
             if (user != null)
             {

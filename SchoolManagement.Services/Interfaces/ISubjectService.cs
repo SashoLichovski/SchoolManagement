@@ -1,8 +1,6 @@
-﻿using SchoolManagement.ViewModels;
-using System;
+﻿using SchoolManagement.Services.ViewModels;
+using SchoolManagement.Services.ViewModels.Subject;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SchoolManagement.Services.Interfaces
 {

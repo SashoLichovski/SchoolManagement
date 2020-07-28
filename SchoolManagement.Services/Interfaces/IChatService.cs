@@ -1,16 +1,20 @@
-﻿using SchoolManagement.Services.ViewModels.Chat;
-using SchoolManagement.ViewModels;
-using System;
+﻿using SchoolManagement.Data;
+using SchoolManagement.Services.ViewModels;
+using SchoolManagement.Services.ViewModels.Chat;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace SchoolManagement.Services.Interfaces
 {
     public interface IChatService
     {
-        ActionMessage Create(string roomName);
+        ActionMessage CreatePublic(string roomName);
+        ActionMessage CreatePrivate(string roomName, Enums.ChatType result, string userId);
         List<ChatroomViewModel> GetAll();
         ChatroomViewModel GetById(int chatroomId);
         ChatroomViewModel GetByName(string defaultRoomName);
+        JoinRoomViewModel GetRoomModel(int chatroomId);
+        Task AddPerson(int chatroomId, string username);
+        List<ChatUser> GetChatUsers(int chatroomId);
     }
 }

@@ -1,0 +1,25 @@
+﻿<div id="publicRooms">
+    @foreach (var chatRoom in Model.Chatrooms)
+    {
+
+        @if (chatRoom.Type == Enums.ChatType.Public)
+        {
+            <a asp-action="JoinRoom" asp-route-chatroomId="@chatRoom.Id">
+                <div class="roomLink hvr-grow" id="activeColor">@chatRoom.Name</div>
+            </a>
+        }
+    }
+</div>
+
+<div id="privateRooms" class="hide">
+    @foreach (var chatRoom in Model.Chatrooms)
+    {
+        @if (chatRoom.Type == Enums.ChatType.Private && chatRoom.UserId.Contains(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+        {
+            <a asp-action="JoinRoom" asp-route-chatroomId="@chatRoom.Id">
+                <div class="roomLink hvr-grow" id="activeColor">@chatRoom.Name</div>
+            </a>
+            <a class="btn btn-primary btn-sm" asp-action="AddPeople" asp-route-chatroomId="@chatRoom.Id">Add people</a>
+        }
+    }
+</div>

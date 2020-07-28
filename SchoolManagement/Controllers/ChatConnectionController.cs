@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using SchoolManagement.Hubs;
-using SchoolManagement.Migrations;
 using SchoolManagement.Services.Interfaces;
+using System.Threading.Tasks;
 
 namespace SchoolManagement.Controllers
 {
@@ -16,38 +12,38 @@ namespace SchoolManagement.Controllers
     public class ChatConnectionController : Controller
     {
         private readonly IHubContext<ChatHub> chat;
-        private readonly IChatService chatService;
         private readonly IMessageService messageService;
 
-        public ChatConnectionController(IHubContext<ChatHub> chat, IChatService chatService, IMessageService messageService)
+        public ChatConnectionController(IHubContext<ChatHub> chat, IMessageService messageService)
         {
             this.chat = chat;
-            this.chatService = chatService;
             this.messageService = messageService;
         }
 
-        [HttpPost("[action]/{connectionId}/{chatroomId}")]
-        public async Task<IActionResult> JoinRoom(string connectionId, int chatroomId)
+        [HttpPost("[action]/{connectionId}/{chatroomName}")]
+        public async Task<IActionResult> JoinRoom(string connectionId, string chatroomName)
         {
-            var chatName = chatService.GetById(chatroomId).Name;
-            await chat.Groups.AddToGroupAsync(connectionId, chatName);
+            await chat.Groups.AddToGroupAsync(connectionId, chatroomName);
             return Ok();
         }
 
-        [HttpPost("[action]/{connectionId}/{chatroomId}")]
-        public async Task<IActionResult> LeaveRoom(string connectionId, int chatroomId)
+        [HttpPost("[action]/{connectionId}/{chatroomName}")]
+        public async Task<IActionResult> LeaveRoom(string connectionId, string chatroomName)
         {
-            var chatName = chatService.GetById(chatroomId).Name;
-            await chat.Groups.RemoveFromGroupAsync(connectionId, chatName);
+            await chat.Groups.RemoveFromGroupAsync(connectionId, chatroomName);
             return Ok();
         }
 
-        public async Task<IActionResult> SendMessage(string text, int chatroomId)
+        [HttpPost("[action]")]
+        public async Task<IActionResult> SendMessage(string text, int chatroomId, string chatroomName)
         {
-            var chatName = chatService.GetById(chatroomId).Name;
             var username = User.Identity.Name;
             var msg = await messageService.Create(username, chatroomId, text);
-            await chat.Clients.Group(chatName).SendAsync("ReceiveMessage", msg);
+            await chat.Clients.Group(chatroomName).SendAsync("ReceiveMessage", new { 
+                Text = msg.Text,
+                CreatedBy = msg.CreatedBy,
+                DatePosted = msg.DatePosted.ToString("MMMM-dd, hh:mm tt")
+            });
             return Ok();
         }
     }

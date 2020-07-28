@@ -1,0 +1,19 @@
+﻿<div class="hide" id="form">
+    <form asp-action="CreateRoom" method="post">
+        <i class="far fa-window-close" id="closeForm" onclick="toggleForm()"></i>
+
+        <div class="form-group">
+            <label for="roomType">Choose room type</label>
+            <select class="form-control" name="roomType">
+                <option value="@Enums.ChatType.Public">Public room</option>
+                <option value="@Enums.ChatType.Private">Private room</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="roomName" class="control-label">Room name</label>
+            <input name="roomName" class="form-control" id="roomNameInput" onchange="disableButton()" />
+        </div>
+        <input class="btn btn-primary" type="submit" value="Create" id="formBtn" />
+    </form>
+</div>

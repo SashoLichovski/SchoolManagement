@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SchoolManagement.Services.Interfaces;
-using SchoolManagement.ViewModels;
+using SchoolManagement.Services.ViewModels;
+using SchoolManagement.Services.ViewModels.Auth;
 using System.Threading.Tasks;
 
 namespace SchoolManagement.Controllers
@@ -32,7 +33,6 @@ namespace SchoolManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Dodaj Logika ako userot ne postoi
                 ActionMessage response = await authService.SignInAsync(model);
                 return RedirectToAction("ActionMessage", "Dashboard", response);
             }
@@ -42,7 +42,7 @@ namespace SchoolManagement.Controllers
         public async Task<IActionResult> Logout()
         {
             await authService.SignOutAsync();
-            return RedirectToAction("Login");
+            return RedirectToAction(nameof(Login));
         }
     }
 }

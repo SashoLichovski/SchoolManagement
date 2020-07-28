@@ -1,24 +1,23 @@
-﻿using Microsoft.AspNetCore.Identity;
-using SchoolManagement.Data;
+﻿using SchoolManagement.Data;
 using SchoolManagement.Services.ViewModels.Chat;
-using SchoolManagement.ViewModels;
-using System;
-using System.Collections.Generic;
+using SchoolManagement.Services.ViewModels.Clasroom;
+using SchoolManagement.Services.ViewModels.Exam;
+using SchoolManagement.Services.ViewModels.Subject;
+using SchoolManagement.Services.ViewModels.User;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
 
 namespace SchoolManagement.Common
 {
     public static class ModelConverter
     {
-        public static AccountDetailsModel ToDetailsModel(this IdentityUser user)
+        public static AccountDetailsModel ToDetailsModel(this User user)
         {
             return new AccountDetailsModel
             {
                 UserId = user.Id,
                 Email = user.Email,
                 UserName = user.UserName,
+                UserImage = user.UserImage,
             };
         }
 
@@ -65,7 +64,8 @@ namespace SchoolManagement.Common
                 Id = chat.Id,
                 Messages = chat.Messages?.Select(x => x.ToMessageViewModel()).ToList(),
                 Name = chat.Name,
-                Type = chat.ChatType
+                Type = chat.ChatType,
+                UserId = chat.Users?.Select(x => x.UserId).ToList()
             };
         }
 
@@ -76,10 +76,8 @@ namespace SchoolManagement.Common
                 Text = message.Text,
                 CreatedBy = message.CreatedBy,
                 ChatId = message.ChatId,
-                DatePosted = message.DatePosted
+                DatePosted = message.DatePosted,
             };
         }
-
-        
     }
 }

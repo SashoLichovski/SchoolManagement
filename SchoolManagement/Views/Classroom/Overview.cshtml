@@ -1,4 +1,5 @@
-﻿@model List<SchoolManagement.ViewModels.ClassroomViewModel>
+﻿@model List<SchoolManagement.Services.ViewModels.Clasroom.ClassroomViewModel>
+
 @{
     ViewData["Title"] = "Overview";
 }
@@ -12,8 +13,8 @@
         <br />
         <a class="btn btn-primary" asp-action="Create">Create classroom</a>
         <hr />
-        <br />
     }
+    <br />
     <table class="table table-striped table-dark">
         <thead>
             <tr>

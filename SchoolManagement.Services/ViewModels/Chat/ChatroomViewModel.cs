@@ -1,7 +1,5 @@
 ﻿using SchoolManagement.Data;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SchoolManagement.Services.ViewModels.Chat
 {
@@ -11,6 +9,6 @@ namespace SchoolManagement.Services.ViewModels.Chat
         public string Name { get; set; }
         public Enums.ChatType Type { get; set; }
         public List<MessageViewModel> Messages { get; set; }
-        public int ChatId { get; set; }
+        public List<string> UserId { get; set; }
     }
 }
