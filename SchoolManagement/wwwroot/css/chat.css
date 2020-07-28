@@ -207,6 +207,13 @@ a:hover {
     }
 }
 
+/*test*/
+@media only screen and (max-width:1300px){
+    .message{
+        display:block;
+    }
+}
+
 @media only screen and (max-width : 1000px){
     .bars {
         display: initial;
@@ -228,9 +235,9 @@ a:hover {
     .chatContainer {
         height: 90%;
     }
-    .message {
+    /*.message {
         display: block;
-    }
+    }*/
     .message p {
         width: 90%;
         padding-left: 10px;

@@ -2,3 +2,13 @@
 .hide{
     display: none;
 }
+
+#addPeopleTable{
+    text-align:center;
+    width:70%;
+    margin:0 auto;
+}
+
+#searchInput{
+    width:250px;
+}
