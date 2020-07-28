@@ -1,5 +1,6 @@
 ﻿@model SchoolManagement.Services.ViewModels.Chat.JoinRoomViewModel
 
+
 @section Styles{
     <link rel="stylesheet" href="~/css/chat.css" />
     <link rel="stylesheet" href="~/lib/Hover-master/css/hover.css" />
@@ -7,7 +8,7 @@
 }
 <partial name="./Partials/_CreateRoomForm" />
 
-<div class="chatRoomContainer" >
+<div class="chatRoomContainer">
 
     <div class="bars" onclick="toggleSideMenu()">
         <i class="fas fa-bars"></i>
@@ -20,10 +21,10 @@
             </div>
 
             <div class="addBtn" id="switchRoomBtn">
-                <button class="btn" onclick="switchRooms(event)">Enter private rooms</button>
+                <button class="btn" onclick="switchRooms(event)">Enter @Model.ChatType rooms</button>
             </div>
 
-            <partial name="./Partials/_ChatRooms" for="@Model"/>
+            <partial name="./Partials/_ChatRooms" for="@Model" />
         </div>
     </div>
 
@@ -45,7 +46,7 @@
             <form method="post" onsubmit="sendMessage(event)">
                 <input hidden name="chatroomId" value="@Model.ChatroomId" id="chatroomId" />
                 <input hidden name="chatroomName" value="@Model.Chatrooms.FirstOrDefault(x => x.Id == Model.ChatroomId).Name" id="chatroomName" />
-                <input name="text" placeholder="Write something to @Model.Chatrooms.FirstOrDefault(x => x.Id == Model.ChatroomId).Name room..." id="inputText"/>
+                <input name="text" placeholder="Write something to @Model.Chatrooms.FirstOrDefault(x => x.Id == Model.ChatroomId).Name room..." id="inputText" />
                 <button type="submit" class="btn btn-success">Send</button>
             </form>
         </div>
