@@ -20,7 +20,7 @@ function toggleForm() {
 
 document.getElementById("formBtn").disabled = true;
 function disableButton() {
-    var input = document.getElementById("roomNameInput");
+    var input = document.getElementById("roomNameInput").trim();
     if (input.value != "") {
         document.getElementById("formBtn").disabled = false;
     } else {

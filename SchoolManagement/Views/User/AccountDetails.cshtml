@@ -18,10 +18,6 @@
         <p><b>User Name:</b> @Model.UserName</p>
         <p><b>Email:</b> @Model.Email</p>
         <a asp-controller="User" asp-action="Edit" asp-route-userId="@User.FindFirst(ClaimTypes.NameIdentifier).Value" class="btn btn-primary">Edit info</a>
-
     </div>
-
-    <br />
-    <br />
 </div>
 
