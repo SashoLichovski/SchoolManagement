@@ -21,7 +21,7 @@ namespace SchoolManagement.Controllers
             this.userService = userService;
         }
 
-        public IActionResult JoinRoom(int chatroomId)
+        public IActionResult JoinRoom(int chatroomId, string chatroomType)
         {
             var model = chatService.GetRoomModel(chatroomId);
             return View(model);

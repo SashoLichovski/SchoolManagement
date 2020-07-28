@@ -9,6 +9,8 @@ a:hover {
 
 
 
+
+
 .addBtn {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     padding: 10px;
@@ -25,9 +27,10 @@ a:hover {
 }
 
 .chatRoomContainer {
-    width: 100%;
-    height: 93.5vh;
+    margin: 20px;
+    height: 80vh;
     display: flex;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .sideMenuContainer {
@@ -59,13 +62,26 @@ a:hover {
     .roomLink:hover {
         background-color: #ff9c07;
         text-decoration: none;
-        
+    }
+
+.privateChatLink {
+    padding: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    color: black;
+    display: grid;
+    text-align: center;
+}
+    .privateChatLink a {
+        margin-bottom: 5px
+    }
+    .privateChatLink a:hover {
+        text-decoration: none;
     }
 
 .chatContainer {
     width: 100%;
     /*    height: 500px;*/
-    background-color: #525252;
+    background-color: #272727;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -104,7 +120,7 @@ a:hover {
 .message {
     display: flex;
     padding: 10px;
-    margin: 10px;
+    margin: 20px;
     background-color: #69e0fb;
     border-radius: 20px;
 }
@@ -176,12 +192,12 @@ a:hover {
 
 @media only screen and (max-height : 855px){
     .chatRoomContainer {
-        height: 92.5vh;
+        height: 75vh;
     }
 }
 @media only screen and (max-height : 530px) {
     .chatRoomContainer {
-        height: 88.5vh;
+        height: 70vh;
     }
 }
 
@@ -190,7 +206,6 @@ a:hover {
         display: initial;
         font-size: 2.2em;
         cursor: pointer;
-        margin-left: 20px;
     }
     .sideMenuContainer {
         background-color: white;
@@ -212,7 +227,10 @@ a:hover {
     }
     .message p {
         width: 90%;
-        padding: 10px;
+        padding-left: 10px;
+    }
+    .chatRoomContainer {
+        box-shadow: none;
     }
 }
 
