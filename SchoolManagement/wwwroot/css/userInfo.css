@@ -1,0 +1,11 @@
+﻿#userInfoContainer{
+    display:flex;
+    padding:10px;
+}
+#userImage {
+    margin: 20px;
+}
+
+#userInfo {
+    margin: 20px;
+}

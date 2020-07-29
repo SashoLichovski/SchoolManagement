@@ -1,5 +1,5 @@
 ﻿function searchUsers() {
-    var input = document.getElementById("searchInput").value;
+    var input = document.getElementById("searchInput").value.toLowerCase();
 
     var userRows = document.getElementsByClassName("userRow");
     

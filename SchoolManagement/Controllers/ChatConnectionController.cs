@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using SchoolManagement.Hubs;
 using SchoolManagement.Services.Interfaces;
+using System;
 using System.Threading.Tasks;
 
 namespace SchoolManagement.Controllers
@@ -39,9 +40,10 @@ namespace SchoolManagement.Controllers
         {
             var username = User.Identity.Name;
             var msg = await messageService.Create(username, chatroomId, text);
-            await chat.Clients.Group(chatroomName).SendAsync("ReceiveMessage", new { 
+            await chat.Clients.Group(chatroomName).SendAsync("ReceiveMessage", new {
                 Text = msg.Text,
                 CreatedBy = msg.CreatedBy,
+                UserImage = Convert.ToBase64String(msg.UserImage),
                 DatePosted = msg.DatePosted.ToString("MMMM-dd, hh:mm tt")
             });
             return Ok();

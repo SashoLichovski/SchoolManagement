@@ -113,8 +113,24 @@ namespace SchoolManagement.Services
             }
             else
             {
-                model.ChatroomId = GetByName(configuration["DefaultChatroom"]).Id;
+                model.ChatroomId = GetByName(configuration["DefaultChatSettings:ChatName"]).Id;
             }
+
+            foreach (var chat in modelList)
+            {
+                if (chat.Type == Enums.ChatType.Public && chat.Id == model.ChatroomId)
+                {
+                    model.PrivateRoomsClass = "hide";
+                    model.ChatType = "private";
+                    break;
+                }
+            }
+            if (string.IsNullOrEmpty(model.PrivateRoomsClass))
+            {
+                model.PublicRoomsClass = "hide";
+                model.ChatType = "public";
+            }
+
             return model;
         }
 
